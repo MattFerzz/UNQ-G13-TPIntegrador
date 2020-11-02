@@ -21,7 +21,7 @@ public class ParkingZonesManager{
 		inspectorApps.add(new InspectorApp(zoneToInspect, inspectorName, this.system));
 	}
 
-	public InspectorApp getAppDeployedInParkingZone(MeasuredParkingZone aParkingZone) {
+	public InspectorApp getInspectorAppDeployedInParkingZone(MeasuredParkingZone aParkingZone) {
 		return inspectorApps.detect(eachApp -> eachApp.getParkingZone() == aParkingZone);
 	}
 }
