@@ -1,4 +1,6 @@
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 /*
  Metodos:
@@ -11,32 +13,49 @@ import java.time.LocalTime;
 
 public class CellApp {
 
-	private float balance = 0;
-	private LocalTime activeParking;
 	private int cellNumber;
+	private SEM server;
+	private UserAsistance state = new DeactivatedUserAssistance();
+
+	private float balance = 0;
+	private DateTimeFormatter dateFrmt = DateTimeFormatter.ISO_LOCAL_TIME;
+	private String activeLisencePlate;
 	
-	public CellApp(int cell_number) {
-		cellNumber = cell_number;
+	public String getActiveLisencePlate() {
+		return activeLisencePlate;
 	}
 	
-	public String StartParking(String licensePlate) {
-		String ret;
+	public CellApp(int cell_number, SEM server) {
+		cellNumber  = cell_number;
+		this.server = server;
+	}
+	
+	public String startParking(String licensePlate) {
+		String output;
+		LocalTime horaActual = LocalTime.now();
+		horaActual = horaActual.minusSeconds(horaActual.getSecond());
 		if (balance >= 40) {
 			double horasEnSaldo = Math.floor(balance/40);
-			LocalTime horaMaxima = LocalTime.now().plusHours((long) horasEnSaldo);
-			ret = "Hora actual: " + LocalTime.now() + ", Hora máxima: " + horaMaxima;
-			activeParking = LocalTime.now();
+			LocalTime horaMaxima = horaActual.plusHours((long) horasEnSaldo);
+			output = "Hora actual: " + horaActual.format(dateFrmt) + ", Hora máxima: " + horaMaxima.format(dateFrmt);
+			activeLisencePlate = licensePlate;
+			server.registerParking(new AppParking(cellNumber, licensePlate, horaActual));
 		} else {
-			ret = "Saldo insuficiente. Estacionamiento no permitido.";
+			output = "Saldo insuficiente. Estacionamiento no permitido.";
 		}
-		return ret;
+		return output;
 	}
 	
-	public String EndParking() {
-		float duracion = ((activeParking.getMinute() > LocalTime.now().getMinute())) ?
-						 LocalTime.now().getHour() - activeParking.getHour() :
-						 LocalTime.now().getHour() - activeParking.getHour() - 1;
-		return "Horario de inicio: " + activeParking + ", horario de finalizacion: " + LocalTime.now() + ", duracion: " + duracion + " horas, costo: " + duracion*40;
+	public String endParking() {
+		LocalTime horaActual = LocalTime.now();
+		horaActual = horaActual.minusSeconds(horaActual.getSecond());
+		Parking parking = server.getParkingManager().getParking(activeLisencePlate);
+		float duration = ((parking.getStart().getMinute() > LocalTime.now().getMinute())) ?
+						 LocalTime.now().getHour() - parking.getStart().getHour() :
+						 LocalTime.now().getHour() - parking.getStart().getHour() - 1;
+		server.getParkingManager().finishParking(activeLisencePlate);
+		return "Horario de inicio: " + parking.getStart().format(dateFrmt) + ", horario de finalizacion: " + horaActual.format(dateFrmt) + ", duracion: " + duration + " horas, costo: " + duration*40;
+		activeLisencePlate = null;
 	}
 	
 	public void loadBalance(float x) {
@@ -45,6 +64,14 @@ public class CellApp {
 	
 	public float checkBalance() {
 		return balance;
+	}
+	
+	public void setState(UserAssistance s) {
+		state = s;
+	}
+	
+	public void on_gps_update(String updateType) {
+		state.handle(updateType, this);
 	}
 	
 }

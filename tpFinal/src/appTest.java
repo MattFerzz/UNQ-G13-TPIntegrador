@@ -1,6 +1,7 @@
 import org.junit.jupiter.api.Test;
 import org.junit.Before;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /*
  Metodos:
@@ -13,9 +14,11 @@ import static org.junit.Assert.*;
 
 public class appTest {
 
-	CellApp app1 = new CellApp(123456);
-	CellApp app2 = new CellApp(234567);
-	CellApp app3 = new CellApp(345678);
+	SEM server = mock(SEM.class);
+	
+	CellApp app1 = new CellApp(123456, server);
+	CellApp app2 = new CellApp(234567, server);
+	CellApp app3 = new CellApp(345678, server);
 	
 	@Before
 	protected void setUp() {
@@ -26,18 +29,18 @@ public class appTest {
 	
 	@Test
 	public void iniciarEstacionamiento(String p) {
-		String resultado1 = app1.StartParking("abc123");
-		String resultado2 = app2.StartParking("bcd234");
-		String resultado3 = app3.StartParking("cde345");
-		assertEquals(resultado1, "Horario de inicio: 16:15, horario máximo: 19:15");
-		assertEquals(resultado2, "Horario de inicio: 16:15, horario máximo: 20:00");
-		assertEquals(resultado3, "Saldo insuficiente. Estacionamiento no permitido.");
+		String parking1 = app1.startParking("abc123");
+		String parking2 = app2.startParking("bcd234");
+		String parking3 = app3.startParking("cde345");
+		assertEquals(parking1, "Horario de inicio: 16:15:00, horario máximo: 19:15:00");
+		assertEquals(parking2, "Horario de inicio: 16:15:00, horario máximo: 20:00:00");
+		assertEquals(parking3, "Saldo insuficiente. Estacionamiento no permitido.");
 	}
 	
 	@Test
 	public void finalizarEstacionamiento() {
-		String resultado1 = app1.EndParking();
-		assertEquals(resultado1, "Horario de inicio: 16:15, horario de finalizacion: 18:45, duracion: 2 horas, costo: 80");
+		String parking1 = app1.endParking();
+		assertEquals(parking1, "Horario de inicio: 16:15:00, horario de finalizacion: 18:45:00, duracion: 2 horas, costo: 80");
 	};
 
 	@Test
