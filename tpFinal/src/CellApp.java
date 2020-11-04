@@ -4,15 +4,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.time.Clock;
 
-/*
- Metodos:
- 	iniciarEstacionamiento(string patente)
- 	finalizarEstacionamiento()
- 	cargarSaldo(float x)
- 	consultarSaldo()
- 	setState(string stateName)
- */
-
 public class CellApp {
 
 	private int cellNumber;

@@ -7,15 +7,6 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 
-/*
- Metodos:
- 	iniciarEstacionamiento(string patente)
- 	finalizarEstacionamiento()
- 	cargarSaldo(float x)
- 	consultarSaldo()
- 	setState(string stateName)
- */
-
 public class appTest {
 
 	SEM                       server  = mock(SEM.class);
@@ -39,8 +30,12 @@ public class appTest {
 	
 	@Test
 	public void getActiveLisencePlate() {
-		app1.startParking("abc123");
 		String lisencePlate = app1.getActiveLisencePlate();
+		assertNull(lisencePlate);
+		Instant fixedClock = Instant.parse("2020-11-03T19:15:00Z");
+		when(clock.instant()).thenReturn(fixedClock);
+		app1.startParking("abc123");
+		lisencePlate = app1.getActiveLisencePlate();
 		assertEquals(lisencePlate, "abc123");
 	}
 	
