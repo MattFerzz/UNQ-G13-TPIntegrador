@@ -1,4 +1,4 @@
-package sec;
+package sem;
 
 
 public class ParkingCardStore {

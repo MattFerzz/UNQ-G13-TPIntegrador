@@ -1,15 +1,17 @@
-package secTests;
+package semTests;
 import org.mockito.Mockito;
+
+import sem.Coordinate;
+import sem.InspectorApp;
+import sem.MeasuredParkingZone;
+import sem.ParkingCardStore;
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.jupiter.api.Test;
-import sec.Coordinate;
-import sec.InspectorApp;
-import sec.MeasuredParkingZone;
-import sec.ParkingCardStore;
 import org.junit.jupiter.api.BeforeEach;
  
 class MeasuredParkingZoneTest {

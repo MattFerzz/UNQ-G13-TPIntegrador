@@ -1,4 +1,4 @@
-package secTests;
+package semTests;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.eclipse.collections.api.factory.Lists;

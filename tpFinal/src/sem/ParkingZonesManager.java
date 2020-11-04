@@ -1,4 +1,4 @@
-package sec;
+package sem;
 
 import org.eclipse.collections.api.list.*;
 import org.eclipse.collections.api.tuple.Pair;
