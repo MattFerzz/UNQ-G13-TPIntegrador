@@ -2,13 +2,15 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.Clock;
 
 public class CellApp {
 
 	private int cellNumber;
 	private SEM server;
-	private UserAssistance state = new DeactivatedUserAssistance();
+	private UserAssistance state;
+	private String defaultLisencePlate;
 
 	private float balance = 0;
 	private DateTimeFormatter dateFrmt = DateTimeFormatter.ISO_LOCAL_TIME;
@@ -19,10 +21,12 @@ public class CellApp {
 		return activeLisencePlate;
 	}
 	
-	public CellApp(int cell_number, SEM server, Clock clock) {
+	public CellApp(int cell_number, SEM server, Clock clock, String defaultLisencePlate, UserAssistance state) {
 		cellNumber  = cell_number;
 		this.server = server;
 		this.clock = clock;
+		this.defaultLisencePlate = defaultLisencePlate;
+		this.state = state;
 	}
 	
 	public String startParking(String licensePlate) {
@@ -36,7 +40,7 @@ public class CellApp {
                                    horaActual.plusHours((long) horasEnSaldo);
 			output = "Horario de inicio: " + horaActual.format(dateFrmt) + ", horario máximo: " + horaMaxima.format(dateFrmt);
 			activeLisencePlate = licensePlate;
-			server.registerParking(new AppParking(cellNumber, licensePlate, horaActual));
+			server.registerParking(new AppParking(cellNumber, licensePlate, LocalDateTime.of(LocalDate.now(Clock.fixed(clock.instant(), ZoneId.systemDefault())), horaActual)));
 		} else {
 			output = "Saldo insuficiente. Estacionamiento no permitido.";
 		}
@@ -74,7 +78,7 @@ public class CellApp {
 	}
 	
 	public void on_gps_update(String updateType) {
-		state.handle(updateType, this);
+		state.handle(updateType, this, defaultLisencePlate);
 	}
 	
 }

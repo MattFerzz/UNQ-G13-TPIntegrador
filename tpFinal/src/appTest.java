@@ -15,10 +15,10 @@ public class appTest {
 	DeactivatedUserAssistance state   = mock(DeactivatedUserAssistance.class);
 	Clock                     clock   = mock(Clock.class);
 	
-	CellApp app1 = new CellApp(123456, server, clock);
-	CellApp app2 = new CellApp(234567, server, clock);
-	CellApp app3 = new CellApp(345678, server, clock);
-	CellApp app4 = new CellApp(456789, server, clock);
+	CellApp app1 = new CellApp(123456, server, clock, "abc123", state);
+	CellApp app2 = new CellApp(234567, server, clock, "bcd234", state);
+	CellApp app3 = new CellApp(345678, server, clock, "cde345", state);
+	CellApp app4 = new CellApp(456789, server, clock, "def456", state);
 	
 	@BeforeEach
 	protected void setUp() {
@@ -82,14 +82,19 @@ public class appTest {
 	
 	@Test
 	public void setSate() {
-		app1.setState(state);
-		assertEquals(app1.getState(), state);
+		DeactivatedUserAssistance state2 = mock(DeactivatedUserAssistance.class);
+		app1.setState(state2);
+		assertEquals(app1.getState(), state2);
 	};
 	
 	@Test
+	public void getState() {
+		assertEquals(app1.getState(), state);
+	}
+	
+	@Test
 	public void on_gps_update() {
-		app1.setState(new DeactivatedUserAssistance());
 		app1.on_gps_update("caminando");
-		assertEquals(app1.getState().getOutput(),"La asistencia al usuario está desactivada");
+		verify(app1.getState()).handle("caminando", app1, "abc123");;
 	}
 }
