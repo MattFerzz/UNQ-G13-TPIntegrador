@@ -17,4 +17,8 @@ public class ParkingMonitor {
 			o.Update();
 		}
 	}
+	
+	public ArrayList<Observer> getObservers() {
+		return observers;
+	}
 }

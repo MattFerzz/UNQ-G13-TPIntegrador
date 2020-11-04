@@ -2,12 +2,19 @@ import java.util.ArrayList;
 
 public class SEM {
 
-	private ParkingZoneManager  zones     = new ParkingZoneManager();
-	private PurchaseManager     purchases = new PurchaseManager();
-	private ParkingManager      parkings  = new ParkingManager();
-	private ParkingMonitor      observer  = new ParkingMonitor();
+	private ParkingZoneManager  zones;
+	private PurchaseManager     purchases;
+	private ParkingManager      parkings;
+	private ParkingMonitor      observer;
 	
-	private void closeAllParkings() {
+	public SEM(ParkingZoneManager z, PurchaseManager pur, ParkingManager prk, ParkingMonitor obs) {
+		zones = z;
+		purchases = pur;
+		parkings = prk;
+		observer = obs;
+	}
+
+	public void closeAllParkings() {
 		parkings.closeAllParkings();
 	}
 	
