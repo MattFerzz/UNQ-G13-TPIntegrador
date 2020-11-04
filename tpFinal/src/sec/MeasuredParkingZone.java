@@ -39,7 +39,7 @@ public class MeasuredParkingZone {
 	}
 	
 	public MutableList<Parking> getActiveParkings(){
-		 parkings.select(eachParking -> // todo);
+		 return parkings.select(eachParking -> eachParking.isValid());
 	}
 	}
 }

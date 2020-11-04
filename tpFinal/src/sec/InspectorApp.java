@@ -18,7 +18,7 @@ public class InspectorApp {
 	}
 	
 	public Boolean hasValidParkingCard(String aLicensePlate) {
-		return system.hasValidParkingCard(aLicensePlate);
+		return system.getParkingManager.hasValidParkingCard(aLicensePlate);
 	}
 	
 	public void generateParkingTicketFor(String aLicensePlate) {
