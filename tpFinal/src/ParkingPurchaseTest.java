@@ -1,4 +1,3 @@
-package estacionamiento;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
@@ -14,7 +13,7 @@ public class ParkingPurchaseTest {
 	@Test 
 	public void getHours() {
 		Integer hours = sut.getHours();
-		assertEquals(hours, 5);
+		assertEquals((long) hours,(long) 5);
 	}
 
 }

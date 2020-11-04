@@ -1,4 +1,3 @@
-package estacionamiento;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
@@ -7,7 +6,7 @@ import java.time.LocalDateTime;
 
 public class AppParkingTest {
 
-	private AppParking sut = new AppParking(1155336622, "Activada", "AA55BB", LocalDateTime.now());
+	private AppParking sut = new AppParking(1155336622, "Activada", "AA55BB", LocalDateTime.of(2020, 11, 4, 13, 45));
 	
 	@Test
 	public void isValid() {
@@ -17,7 +16,7 @@ public class AppParkingTest {
 	@Test
 	public void getNumberPhone() {
 		 Integer num = sut.getNumberPhone();
-		 assertEquals(num, 1155336622);
+		 assertEquals((long)num,(long)1155336622);
 	}
 	
 	@Test
@@ -49,11 +48,14 @@ public class AppParkingTest {
 	@Test
 	public void getStart() {
         LocalDateTime date = sut.getStart();
+        System.out.println(date);
+        System.out.println(LocalDateTime.of(2020, 11, 4, 13, 45));
         assertEquals(date, LocalDateTime.of(2020, 11, 4, 13, 45)); 
 	}
 	
 	@Test 
 	public void getFinish() {
+		sut.setFinish(LocalDateTime.of(2020,11,4,16,45));
         LocalDateTime date = sut.getFinish();
         assertEquals(date, LocalDateTime.of(2020,11,4,16,45));
 	}

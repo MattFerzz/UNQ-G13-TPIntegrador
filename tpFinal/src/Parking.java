@@ -1,4 +1,3 @@
-package estacionamiento;
 import java.time.LocalDateTime;
 
 public abstract class Parking {

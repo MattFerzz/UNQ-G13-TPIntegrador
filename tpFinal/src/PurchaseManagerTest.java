@@ -1,4 +1,3 @@
-package estacionamiento;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
@@ -20,7 +19,7 @@ public class PurchaseManagerTest {
 	
 	@Test 
 	public void generateBalanceRecharge() {
-		sut.generateBalanceRecharge(zone, 1133665588, 100);
+		sut.generateBalanceRecharge(zone, (Integer) 1133665588, (float) 100);
 		assertEquals(sut.getPurchases().size(), 1);
 	}
 	

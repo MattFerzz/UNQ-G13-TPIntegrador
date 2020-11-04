@@ -1,4 +1,4 @@
-package estacionamiento;
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ public class PurchaseManager {
 		ParkingPurchase purchase = new ParkingPurchase(generateNextControlNumber(), zone, LocalDateTime.now(), hours);
 		purchases.add(purchase);
 		
-		LocalParking parking = new LocalParking(licensePlate, LocalDateTime.now(), purchase, LocalDateTime.now().plusHours((long)hours));
+		LocalParking parking = new LocalParking(licensePlate, LocalDateTime.now(), purchase, LocalDateTime.now().plusHours((long)hours), Clock.systemDefaultZone());
 		server.registerParking(parking);	
 	}
 
@@ -36,7 +36,7 @@ public class PurchaseManager {
 		return purchases;
 	}
 	
-	public long getCotrolNumber() {
+	public long getControlNumber() {
 		return controlNumber;
 	}
 }

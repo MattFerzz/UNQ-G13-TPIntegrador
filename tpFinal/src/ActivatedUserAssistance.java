@@ -1,5 +1,3 @@
-package estacionamiento;
-
 public class ActivatedUserAssistance extends UserAssistance {
 	
 	public void handle(String updateType, CellApp app, String licensePlate) {

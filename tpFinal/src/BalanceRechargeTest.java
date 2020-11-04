@@ -1,4 +1,3 @@
-package estacionamiento;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
@@ -12,13 +11,13 @@ public class BalanceRechargeTest {
 	@Test
 	public void getPhoneNumber() {
 		Integer phone = sut.getPhoneNumber();
-		assertEquals(phone, 1155662233);	
+		assertEquals((long)phone, (long)1155662233);	
 	}
 	
 	@Test 
 	public void getMount() {
 		Float mount =sut.getMount();
-		assertEquals(mount, 50);
+		assertEquals(mount, 50, 0);
 	}
 }
 
