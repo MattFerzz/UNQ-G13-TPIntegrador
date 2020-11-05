@@ -11,7 +11,7 @@ import sec.InspectorApp;
 import sec.MeasuredParkingZone;
 import sec.ParkingZonesManager;
 
-class ParkingZonesManagerTest {
+class ParkingZoneManagerTest {
 	private MutableList<MeasuredParkingZone> parkingZones;
 	private MutableList<InspectorApp> inspectorApps;
 	private System system;
@@ -27,7 +27,7 @@ class ParkingZonesManagerTest {
 
 	@Test
 	void testCreation() {
-	new ParkingZonesManager(MutableList<MeasuredParkingZone> parkingZones, System system, MutableList<InspectorApp> inspectorApps)
+	new ParkingZoneManager(MutableList<MeasuredParkingZone> parkingZones, System system, MutableList<InspectorApp> inspectorApps)
 	}
 
 }

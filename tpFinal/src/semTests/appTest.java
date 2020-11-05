@@ -1,4 +1,9 @@
+package semTests;
 import org.junit.jupiter.api.Test;
+
+import sem.CellApp;
+import sem.SEM;
+
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -29,7 +34,7 @@ public class appTest {
 	};
 	
 	@Test
-	public void getActiveLisencePlate() {
+	public void testGetActiveLisencePlate() {
 		String lisencePlate = app1.getActiveLisencePlate();
 		assertNull(lisencePlate);
 		Instant fixedClock = Instant.parse("2020-11-03T19:15:00Z");
@@ -40,7 +45,7 @@ public class appTest {
 	}
 	
 	@Test
-	public void startParking() {
+	public void testStartParking() {
 		Instant fixedClock = Instant.parse("2020-11-03T19:15:00Z");
 		when(clock.instant()).thenReturn(fixedClock);
 		String parking1 = app1.startParking("abc123");
@@ -54,7 +59,7 @@ public class appTest {
 	}
 	
 	@Test
-	public void endParking() {
+	public void testEndParking() {
 		Instant fixedClock = Instant.parse("2020-11-03T21:45:00Z");
 		when(server.getParkingManager()).thenReturn(pkm);
 		when(pkm.getParking(null)).thenReturn(parking);
@@ -67,33 +72,33 @@ public class appTest {
 	};
 
 	@Test
-	public void loadBalance() {
+	public void testLoadBalance() {
 		float saldoPrevio = app3.checkBalance();
 		app3.loadBalance(100);
 		assertEquals(app3.checkBalance(), saldoPrevio + 100, 0);
 	};
 	
 	@Test
-	public void checkBalance() {
+	public void testCheckBalance() {
 		assertEquals(app1.checkBalance(), 130, 0);
 		assertEquals(app2.checkBalance(), 1000, 0);
 		assertEquals(app3.checkBalance(), 10, 0);
 	}
 	
 	@Test
-	public void setSate() {
+	public void testSetSate() {
 		DeactivatedUserAssistance state2 = mock(DeactivatedUserAssistance.class);
 		app1.setState(state2);
 		assertEquals(app1.getState(), state2);
 	};
 	
 	@Test
-	public void getState() {
+	public void testGetState() {
 		assertEquals(app1.getState(), state);
 	}
 	
 	@Test
-	public void on_gps_update() {
+	public void testOn_gps_update() {
 		app1.on_gps_update("caminando");
 		verify(app1.getState()).handle("caminando", app1, "abc123");;
 	}

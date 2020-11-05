@@ -2,7 +2,7 @@ package sem;
 
 import org.eclipse.collections.api.list.*;
 import org.eclipse.collections.api.tuple.Pair;
-public class ParkingZonesManager{
+public class ParkingZoneManager{
 	private MutableList<MeasuredParkingZone> parkingZones;
 	private MutableList<InspectorApp> inspectorApps;
 	private System system;

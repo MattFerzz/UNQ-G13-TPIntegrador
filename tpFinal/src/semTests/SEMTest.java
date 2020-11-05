@@ -1,4 +1,9 @@
+package semTests;
 import org.junit.jupiter.api.Test;
+
+import sem.ParkingMonitor;
+import sem.SEM;
+
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
@@ -13,36 +18,36 @@ public class SEMTest {
 	
 	
 	@Test
-	public void closeAllParkings() {
+	public void testCloseAllParkings() {
 		server.closeAllParkings();
 		verify(prkManager).closeAllParkings();
 	}
 	
 	@Test
-	public void Notify() {
+	public void testNotify() {
 		server.Notify();
 		verify(prkMonitor).Notify();
 	}
 	
 	@Test
-	public void getParkingManager() {
+	public void testGetParkingManager() {
 		assertSame(server.getParkingManager(), prkManager);
 	}
 	
 	@Test
-	public void getPurchaseManager() {
+	public void testGetPurchaseManager() {
 		assertSame(server.getPurchaseManager(), prchManager);
 	}
 	
 	@Test
-	public void registerPurchase() {
+	public void testRegisterPurchase() {
 		Purchase p = mock(Purchase.class);
 		server.registerPurchase(p);
 		verify(prchManager).registerPurchase(p);
 	}
 	
 	@Test
-	public void registerParking() {
+	public void testRegisterParking() {
 		Parking p = mock(Parking.class);
 		server.registerParking(p);
 		verify(prkManager).registerParking(p);

@@ -1,3 +1,4 @@
+package sem;
 
 public interface Observer {
 

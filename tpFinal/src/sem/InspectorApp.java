@@ -3,8 +3,8 @@ package sem;
 public class InspectorApp {
 	private MeasuredParkingZone parkingZone;
 	private String inspectorName;
-	private System system;
-	public InspectorApp(MeasuredParkingZone parkingZone, String inspectorName, System system) {
+	private SEM system;
+	public InspectorApp(MeasuredParkingZone parkingZone, String inspectorName, SEM system) {
 		this.parkingZone = parkingZone;
 		this.inspectorName = inspectorName;
 		this.system = system;

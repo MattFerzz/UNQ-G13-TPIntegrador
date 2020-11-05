@@ -4,26 +4,36 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import sem.InspectorApp;
+import sem.MeasuredParkingZone;
+import sem.SEM;
 
 class InspectorAppTest {
-
+	private MeasuredParkingZone mockParkingZone;
+	private String inspectorName;
+	private SEM mockSystem;
+	private InspectorApp inspectorApp;
 	@BeforeEach
 	void setUp() throws Exception {
+		mockParkingZone = Mockito.mock(MeasuredParkingZone.class);
+		inspectorName = "Juan Perez";
+		mockSystem = Mockito.mock(SEM.class);
+		Mockito.when(mockSystem.getParkingManager().hasValidParking("AA506BG")).thenReturn(true);
+		
+		inspectorApp = new InspectorApp(mockParkingZone, inspectorName, mockSystem);
 	}
 
-	@Test
-	void testInspectorApp() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	void testGetParkingZone() {
-		fail("Not yet implemented");
+		assertEquals(mockParkingZone, inspectorApp.getParkingZone());
 	}
 
 	@Test
 	void testGetInspectorName() {
-		fail("Not yet implemented");
+		assertEquals(inspectorName, inspectorApp.getInspectorName());
 	}
 
 	@Test

@@ -1,4 +1,9 @@
+package semTests;
 import org.junit.jupiter.api.Test;
+
+import sem.Observer;
+import sem.ParkingMonitor;
+
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.BeforeEach;
 import static org.mockito.Mockito.*;
@@ -15,18 +20,18 @@ public class ParkingMonitorTest {
 	}
 	
 	@Test
-	public void Attatch() {
+	public void testAttatch() {
 		assertEquals(sut.getObservers().size(), 1);
 	}
 
 	@Test
-	public void Detach() {
+	public void testDetach() {
 		sut.Detach(o);
 		assertEquals(sut.getObservers().size(), 0);
 	}
 
 	@Test
-	public void Notify() {
+	public void testNotify() {
 		sut.Notify();
 		verify(o).Update();
 	}

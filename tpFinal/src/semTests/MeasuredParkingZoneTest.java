@@ -15,32 +15,43 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
  
 class MeasuredParkingZoneTest {
-	private ParkingCardStore mockParkingCardStore;
+	private Coordinate mockParkingCardStoreLocation;
 	private InspectorApp mockInspector;
 	private MutableList<ParkingCardStore> parkingCardStores;
 	private Coordinate mockCoordinate;
 	private Pair<Coordinate, Coordinate> boundaries;
 	private MeasuredParkingZone parkingZone;
+	private String description;
 	
 	@BeforeEach
 	void setUp() {
-		mockParkingCardStore = Mockito.mock(ParkingCardStore.class);
+		mockParkingCardStoreLocation = Mockito.mock(Coordinate.class);
 		mockInspector = Mockito.mock(InspectorApp.class);
 		parkingCardStores = Lists.mutable.with(mockParkingCardStore);
 		mockCoordinate = Mockito.mock(Coordinate.class);
 		boundaries = Tuples.pair(mockCoordinate, mockCoordinate);
+		description = "Zona de estacionamiento barrio Kolynos";
 		
-		parkingZone = new MeasuredParkingZone(parkingCardStores, mockInspector, boundaries);
+		parkingZone = new MeasuredParkingZone(description, boundaries);
+	}
+	@Test
+	void testRegisterAndGetParkingCardStores() {
+		parkingZone.registerParkingCardStore(mockParkingCardStoreLocation);
+		assertEquals(parkingCardStores, parkingZone.getParkingCardStores().getFirst());
+	}
+	@Test
+	void testRegisterAndGetParking() {
+		parkingZone.registerParking(mockParking);
+		assertEquals(parkingCardStores, parkingZone.getParkingCardStores().getFirst());
+	}
+	
+	void testGetActiveParkings() {
+		//TO-DO
 	}
  
 	@Test
-	void testGetParkingCardStores() {
-		assertEquals(parkingCardStores, parkingZone.getParkingCardStores());
-	}
- 
-	@Test
-	void testGetDesignatedInspector() {
-		assertEquals(mockInspector, parkingZone.getDesignatedInspector());
+	void testGetDescription() {
+		assertEquals(description, parkingZone.getdesctiption());
 	}
  
 	@Test
