@@ -4,7 +4,7 @@ package sem;
 public class ParkingCardStore {
 	private Coordinate location;
 	private MeasuredParkingZone parkingZone;
-	private System system;
+	private SEM system;
 	
 	public ParkingCardStore(Coordinate location, MeasuredParkingZone parkingZone) {
 		this.parkingZone = parkingZone;

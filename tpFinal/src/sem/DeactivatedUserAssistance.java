@@ -1,3 +1,5 @@
+package sem;
+
 public class DeactivatedUserAssistance extends UserAssistance{
 	
 	public void handle(String updateType, CellApp app, String licensePlate) {

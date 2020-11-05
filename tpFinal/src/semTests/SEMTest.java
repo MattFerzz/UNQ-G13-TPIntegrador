@@ -1,11 +1,18 @@
 package semTests;
+
+import static org.junit.Assert.assertSame;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import org.junit.jupiter.api.Test;
 
+import sem.Parking;
+import sem.ParkingManager;
 import sem.ParkingMonitor;
+import sem.ParkingZoneManager;
+import sem.Purchase;
+import sem.PurchaseManager;
 import sem.SEM;
-
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class SEMTest {
 	

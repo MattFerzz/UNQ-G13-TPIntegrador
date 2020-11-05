@@ -1,18 +1,18 @@
 package semTests;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.impl.tuple.Tuples;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import sem.Coordinate;
 import sem.InspectorApp;
 import sem.MeasuredParkingZone;
 import sem.ParkingCardStore;
-
-import static org.junit.jupiter.api.Assertions.*;
-import org.eclipse.collections.api.factory.Lists;
-import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.impl.tuple.Tuples;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
  
 class MeasuredParkingZoneTest {
 	private Coordinate mockParkingCardStoreLocation;

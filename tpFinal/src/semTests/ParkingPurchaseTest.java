@@ -1,8 +1,14 @@
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+package semTests;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+
 import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import sem.MeasuredParkingZone;
+import sem.ParkingPurchase;
 
 
 public class ParkingPurchaseTest {
@@ -11,7 +17,7 @@ public class ParkingPurchaseTest {
 	private ParkingPurchase sut = new ParkingPurchase(3, zone, LocalDateTime.now(), 5);
 	
 	@Test 
-	public void getHours() {
+	public void testGetHours() {
 		Integer hours = sut.getHours();
 		assertEquals((long) hours,(long) 5);
 	}

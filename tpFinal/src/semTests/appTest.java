@@ -1,16 +1,22 @@
 package semTests;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.time.Clock;
+import java.time.Instant;
+import java.time.LocalTime;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import sem.CellApp;
+import sem.DeactivatedUserAssistance;
+import sem.Parking;
+import sem.ParkingManager;
 import sem.SEM;
-
-import org.junit.jupiter.api.BeforeEach;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-import java.time.LocalTime;
-import java.time.Clock;
-import java.time.Instant;
-import java.time.ZoneId;
 
 public class appTest {
 

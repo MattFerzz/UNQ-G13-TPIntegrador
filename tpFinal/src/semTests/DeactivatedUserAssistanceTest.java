@@ -1,9 +1,15 @@
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+package semTests;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import org.junit.jupiter.api.Test;
+
+import sem.CellApp;
+import sem.DeactivatedUserAssistance;
 
 public class DeactivatedUserAssistanceTest {
 	private DeactivatedUserAssistance sut = new DeactivatedUserAssistance();
@@ -12,7 +18,7 @@ public class DeactivatedUserAssistanceTest {
 	
 	
 	@Test
-	public void handle() {
+	public void testHandle() {
 		System.setOut(new PrintStream(outContent));
 		sut.handle("Caminando", app, "AA55BB");
 		assertEquals(outContent.toString(), "La asistencia al Usuario esta desactivada");

@@ -1,52 +1,58 @@
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+package semTests;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import sem.AppParking;
 
 public class AppParkingTest {
 
 	private AppParking sut = new AppParking(1155336622, "Activada", "AA55BB", LocalDateTime.of(2020, 11, 4, 13, 45));
 	
 	@Test
-	public void isValid() {
+	public void testIsValid() {
 		assertTrue(sut.isValid());
 	}
 	
 	@Test
-	public void getNumberPhone() {
+	public void testGetNumberPhone() {
 		 Integer num = sut.getNumberPhone();
 		 assertEquals((long)num,(long)1155336622);
 	}
 	
 	@Test
-	public void getOutput() {
+	public void testGetOutput() {
 		String output = sut.getOutput();
 		assertEquals(output, "Activada");
 	}
 	
 	@Test
-	public void setOutPut() {
+	public void testSetOutPut() {
 		sut.setOutput("Desactivada");
 		String output = sut.getOutput();
 		assertEquals(output, "Desactivada");
 	}
 
 	@Test
-	public void finish() {
+	public void testFinish() {
 		sut.finish();
 		assertFalse(sut.isValid());
 	}
 	
 
 	@Test
-	public void getLicensePlate() {
+	public void testGetLicensePlate() {
 		String lp = sut.getLicensePlate();
 		assertEquals(lp, "AA55BB");
 	}
 	
 	@Test
-	public void getStart() {
+	public void testGetStart() {
         LocalDateTime date = sut.getStart();
         System.out.println(date);
         System.out.println(LocalDateTime.of(2020, 11, 4, 13, 45));
@@ -54,14 +60,14 @@ public class AppParkingTest {
 	}
 	
 	@Test 
-	public void getFinish() {
+	public void testGetFinish() {
 		sut.setFinish(LocalDateTime.of(2020,11,4,16,45));
         LocalDateTime date = sut.getFinish();
         assertEquals(date, LocalDateTime.of(2020,11,4,16,45));
 	}
 	
 	@Test
-	public void setFinish() {
+	public void testSetFinish() {
 		sut.setFinish(LocalDateTime.of(2020,11,4,22,45)); 
 		LocalDateTime date = sut.getFinish();
 		assertEquals(date,LocalDateTime.of(2020,11,4,22,45));
