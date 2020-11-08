@@ -9,12 +9,10 @@ public class MeasuredParkingZone {
 	private MutableList<ParkingCardStore> parkingCardStores;
 	private String description;
 	private Pair<Coordinate, Coordinate> boundaries;
-	private MutableList<Parking> parkings;
 	public MeasuredParkingZone( String description,Pair<Coordinate, Coordinate> boundaries) {
 		this.description = description;
 		this.boundaries = boundaries;
 		this.parkingCardStores = Lists.mutable.empty();
-		this.parkings = Lists.mutable.empty();
 	}
 
 	public void registerParkingCardStore(Coordinate location) {

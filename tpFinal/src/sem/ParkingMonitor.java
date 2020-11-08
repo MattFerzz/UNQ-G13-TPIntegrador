@@ -14,8 +14,8 @@ public class ParkingMonitor {
 	}
 
 	public void Notify() {
-		for(Observer o : observers) {
-			o.Update();
+		for(Observer observer : observers) {
+			observer.update();
 		}
 	}
 	

@@ -4,15 +4,17 @@ import java.time.LocalDateTime;
 
 public abstract class Parking {
 	private String licensePlate; 
-	private LocalDateTime start;
-	private LocalDateTime finish;
+	private LocalDateTime startTime;
+	private LocalDateTime finishTime;
 	
 	public Parking(String licensePlate, LocalDateTime start) {
 		this.licensePlate = licensePlate;
-		this.start = start;
+		this.startTime = start;
 	}
 
 	public abstract boolean isValid();
+	
+	public abstract void finish();
 
 	
 	public String getLicensePlate() {
@@ -20,16 +22,17 @@ public abstract class Parking {
 	}
 
 
-	public LocalDateTime getStart() {
-		return start;
+	public LocalDateTime getStartTime() {
+		return startTime;
 	}
 
-	public LocalDateTime getFinish() {
-		return finish;
+
+	public LocalDateTime getFinishTime() {
+		return finishTime;
 	}
 	
-	public void setFinish(LocalDateTime finish) {
-		this.finish = finish;
+	public void setFinishTime(LocalDateTime finish) {
+		this.finishTime = finish;
 	}
 
 }

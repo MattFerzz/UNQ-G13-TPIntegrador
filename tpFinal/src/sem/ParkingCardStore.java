@@ -13,7 +13,7 @@ public class ParkingCardStore {
 	}
 	
 	public void sellParkingCard(String aLicensePlate, Integer hoursAmount) {
-		system.getPurchaseManager().generateParkingPurchase(parkingZone ,aLicensePlate, hoursAmount);
+		system.generateParkingPurchase(parkingZone ,hoursAmount, aLicensePlate);
 	}
 	public Coordinate getLocation() {
 		return location;

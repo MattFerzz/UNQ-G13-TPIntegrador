@@ -47,13 +47,6 @@ public class SEMTest {
 	}
 	
 	@Test
-	public void testRegisterPurchase() {
-		Purchase p = mock(Purchase.class);
-		server.registerPurchase(p);
-		verify(prchManager).registerPurchase(p);
-	}
-	
-	@Test
 	public void testRegisterParking() {
 		Parking p = mock(Parking.class);
 		server.registerParking(p);

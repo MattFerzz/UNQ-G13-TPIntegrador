@@ -14,8 +14,10 @@ public class LocalParking extends Parking {
 		this.clock = clock;
 	}
 	
+	public void finish(){
+	}
 	public boolean isValid() {
-		return LocalDateTime.now(Clock.fixed(clock.instant(), ZoneId.systemDefault())).isAfter(getFinish());
+		return LocalDateTime.now(Clock.fixed(clock.instant(), ZoneId.systemDefault())).isAfter(getFinishTime());
 	}
 
 }

@@ -4,7 +4,8 @@ import org.eclipse.collections.api.list.MutableList;
 
 public class ParkingManager {
 	private MutableList<Parking> parkings;
-
+	private SEM server;
+	
 	public MutableList<Parking> getValidParkings() {
 		return parkings.select(eachParking -> eachParking.isValid());
 	}
@@ -14,17 +15,16 @@ public class ParkingManager {
 	}
 	
 	public Boolean hasValidParking(String aLicensePlate) {
-		return this.getValidParkings().anySatisfy(eachparking -> eachparking.getLicensePlate = aLicensePlate);
+		return this.getValidParkings().anySatisfy(eachparking -> eachparking.getLicensePlate() == aLicensePlate);
 	}
 	
 	public Parking getParking(String aLicensePlate) {
-		return this.getValidParkings().detect(eachparking -> eachparking.getLicensePlate = aLicensePlate);
+		return this.getValidParkings().detect(eachparking -> eachparking.getLicensePlate() == aLicensePlate);
 	}
 	
 	public void registerParking(Parking aParking) {
 		parkings.add(aParking);
-		server.notifyNewParking(aParking);
+		server.notify();
 	}
-	
-	public 
+
 }

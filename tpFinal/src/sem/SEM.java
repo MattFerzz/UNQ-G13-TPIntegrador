@@ -23,17 +23,14 @@ public class SEM {
 		observer.Notify();
 	}
 	
-	public ParkingManager getParkingManager() {
-		return parkings;
+	public Parking getParking(String aLicensePlate) {
+		return parkings.getParking(aLicensePlate);
 	}
 	
-	public PurchaseManager getPurchaseManager() {
-		return purchases;
+	public void generateParkingPurchase( MeasuredParkingZone zone, Integer hours, String licensePlate) {
+		purchases.generateParkingPurchase(zone, hours, licensePlate);
 	}
 	
-	public void registerPurchase(Purchase p) {
-		purchases.registerPurchase(p);
-	}
 	
 	public void registerParking(Parking p) {
 		parkings.registerParking(p);

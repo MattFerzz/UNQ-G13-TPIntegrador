@@ -62,14 +62,14 @@ public class AppParkingTest {
 	@Test 
 	public void testGetFinish() {
 		sut.setFinish(LocalDateTime.of(2020,11,4,16,45));
-        LocalDateTime date = sut.getFinish();
+        LocalDateTime date = sut.getFinishTime();
         assertEquals(date, LocalDateTime.of(2020,11,4,16,45));
 	}
 	
 	@Test
 	public void testSetFinish() {
 		sut.setFinish(LocalDateTime.of(2020,11,4,22,45)); 
-		LocalDateTime date = sut.getFinish();
+		LocalDateTime date = sut.getFinishTime();
 		assertEquals(date,LocalDateTime.of(2020,11,4,22,45));
 	}
 

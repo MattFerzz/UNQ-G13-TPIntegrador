@@ -8,7 +8,7 @@ import java.time.Clock;
 
 public class CellApp {
 
-	private int cellNumber;
+	private Integer cellNumber;
 	private SEM server;
 	private UserAssistance state;
 	private String defaultLisencePlate;
@@ -22,7 +22,7 @@ public class CellApp {
 		return activeLisencePlate;
 	}
 	
-	public CellApp(int cell_number, SEM server, Clock clock, String defaultLisencePlate, UserAssistance state) {
+	public CellApp(Integer cell_number, SEM server, Clock clock, String defaultLisencePlate, UserAssistance state) {
 		cellNumber  = cell_number;
 		this.server = server;
 		this.clock = clock;
@@ -52,7 +52,7 @@ public class CellApp {
 		LocalTime horaActual = LocalTime.now(Clock.fixed(clock.instant(), ZoneId.systemDefault()));
 		horaActual = horaActual.minusSeconds(horaActual.getSecond());
 		horaActual = horaActual.minusNanos(horaActual.getNano());
-		Parking parking = server.getParkingManager().getParking(activeLisencePlate);
+		Parking parking = server.getParking(activeLisencePlate);
 		LocalTime pStart = parking.getStart();
 		float duration = (pStart.getMinute() > horaActual.getMinute()) ?
 				         horaActual.getHour() - pStart.getHour() - 1:
@@ -78,7 +78,7 @@ public class CellApp {
 		return state;
 	}
 	
-	public void on_gps_update(String updateType) {
+	public void onGpsUpdate(String updateType) {
 		state.handle(updateType, this, defaultLisencePlate);
 	}
 	
