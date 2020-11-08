@@ -1,5 +1,6 @@
 package sem;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.*;
 import org.eclipse.collections.api.tuple.*;
 
@@ -12,6 +13,8 @@ public class MeasuredParkingZone {
 	public MeasuredParkingZone( String description,Pair<Coordinate, Coordinate> boundaries) {
 		this.description = description;
 		this.boundaries = boundaries;
+		this.parkingCardStores = Lists.mutable.empty();
+		this.parkings = Lists.mutable.empty();
 	}
 
 	public void registerParkingCardStore(Coordinate location) {
@@ -41,5 +44,5 @@ public class MeasuredParkingZone {
 	public MutableList<Parking> getActiveParkings(){
 		 return parkings.select(eachParking -> eachParking.isValid());
 	}
-	}
+
 }

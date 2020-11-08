@@ -2,6 +2,7 @@ package sem;
 
 
 public class ParkingCardStore {
+
 	private Coordinate location;
 	private MeasuredParkingZone parkingZone;
 	private SEM system;
@@ -12,6 +13,13 @@ public class ParkingCardStore {
 	}
 	
 	public void sellParkingCard(String aLicensePlate, Integer hoursAmount) {
-		system.getPurchaseManager.generateParkingPurchase(parkingZone ,aLicensePlate, hoursAmount);
+		system.getPurchaseManager().generateParkingPurchase(parkingZone ,aLicensePlate, hoursAmount);
+	}
+	public Coordinate getLocation() {
+		return location;
+	}
+
+	public MeasuredParkingZone getParkingZone() {
+		return parkingZone;
 	}
 }

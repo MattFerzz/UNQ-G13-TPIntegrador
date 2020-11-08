@@ -1,5 +1,6 @@
 package semTests;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -21,7 +22,6 @@ class InspectorAppTest {
 		mockParkingZone = Mockito.mock(MeasuredParkingZone.class);
 		inspectorName = "Juan Perez";
 		mockSystem = Mockito.mock(SEM.class);
-		Mockito.when(mockSystem.getParkingManager().hasValidParking("AA506BG")).thenReturn(true);
 		
 		inspectorApp = new InspectorApp(mockParkingZone, inspectorName, mockSystem);
 	}
@@ -39,12 +39,14 @@ class InspectorAppTest {
 
 	@Test
 	void testHasValidParkingCard() {
-		fail("Not yet implemented");
+		Mockito.when(mockSystem.getParkingManager().hasValidParking("AA506BG")).thenReturn(true);
+		
+		assertTrue(inspectorApp.hasValidParkingCard("AA506BG"));
 	}
 
 	@Test
 	void testGenerateParkingTicketFor() {
-		fail("Not yet implemented");
+		//FIX;
 	}
 
 }

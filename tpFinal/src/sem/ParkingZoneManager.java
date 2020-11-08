@@ -1,11 +1,19 @@
 package sem;
 
+import org.eclipse.collections.api.factory.Lists;
 import org.eclipse.collections.api.list.*;
 import org.eclipse.collections.api.tuple.Pair;
 public class ParkingZoneManager{
+
 	private MutableList<MeasuredParkingZone> parkingZones;
 	private MutableList<InspectorApp> inspectorApps;
-	private System system;
+	private SEM system;
+	
+	public ParkingZoneManager(SEM system) {
+		this.system = system;
+		this.parkingZones = Lists.mutable.empty();
+		this.inspectorApps = Lists.mutable.empty();
+	}
 
 	public void addMeasuredParkingZone(MeasuredParkingZone aParkingZone) {
 		parkingZones.add(aParkingZone);

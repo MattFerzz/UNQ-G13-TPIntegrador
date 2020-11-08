@@ -1,19 +1,34 @@
 package semTests;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ParkingCardStoreTest {
+import sem.Coordinate;
+import sem.MeasuredParkingZone;
+import sem.ParkingCardStore;
 
+class ParkingCardStoreTest {
+	private ParkingCardStore parkingStore;
+	private Coordinate location;
+	private MeasuredParkingZone parkingZone;
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp(){
+		
 	}
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	public void testSellParkingCard() {
+		
+	}
+	@Test
+	public void testGetLocation() {
+		
+	}
+	@Test
+	public void testGetParkingZone() {
+		
 	}
 
 }
