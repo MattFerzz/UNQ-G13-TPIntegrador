@@ -20,15 +20,9 @@ public class AppParkingTest {
 	}
 	
 	@Test
-	public void testGetNumberPhone() {
-		 Integer num = sut.getNumberPhone();
+	public void testGetPhoneNumber() {
+		 Integer num = sut.getPhoneNumber();
 		 assertEquals((long)num,(long)1155336622);
-	}
-	
-	@Test
-	public void testGetOutput() {
-		String output = sut.getOutput();
-		assertEquals(output, "Activada");
 	}
 	
 	@Test
@@ -37,6 +31,14 @@ public class AppParkingTest {
 		String output = sut.getOutput();
 		assertEquals(output, "Desactivada");
 	}
+	
+	@Test
+	public void testGetOutput() {
+		sut.setOutput("Activada");
+		String output = sut.getOutput();
+		assertEquals(output, "Activada");
+	}
+	
 
 	@Test
 	public void testFinish() {
@@ -52,15 +54,15 @@ public class AppParkingTest {
 	}
 	
 	@Test
-	public void testGetStart() {
-        LocalDateTime date = sut.getStart();
+	public void testGetStartTime() {
+        LocalDateTime date = sut.getStartTime();
         System.out.println(date);
         System.out.println(LocalDateTime.of(2020, 11, 4, 13, 45));
         assertEquals(date, LocalDateTime.of(2020, 11, 4, 13, 45)); 
 	}
 	
 	@Test 
-	public void testGetFinish() {
+	public void testGetFinishTime() {
 		sut.setFinish(LocalDateTime.of(2020,11,4,16,45));
         LocalDateTime date = sut.getFinishTime();
         assertEquals(date, LocalDateTime.of(2020,11,4,16,45));

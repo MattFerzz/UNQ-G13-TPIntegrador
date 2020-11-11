@@ -5,12 +5,13 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import sem.CellApp;
 import sem.DeactivatedUserAssistance;
@@ -24,12 +25,11 @@ public class appTest {
 	Parking                   parking = mock(Parking.class);
 	ParkingManager            pkm     = mock(ParkingManager.class);
 	DeactivatedUserAssistance state   = mock(DeactivatedUserAssistance.class);
-	Clock                     clock   = mock(Clock.class);
 	
-	CellApp app1 = new CellApp(123456, server, clock, "abc123", state);
-	CellApp app2 = new CellApp(234567, server, clock, "bcd234", state);
-	CellApp app3 = new CellApp(345678, server, clock, "cde345", state);
-	CellApp app4 = new CellApp(456789, server, clock, "def456", state);
+	CellApp app1 = new CellApp(123456, server, "abc123", state);
+	CellApp app2 = new CellApp(234567, server, "bcd234", state);
+	CellApp app3 = new CellApp(345678, server, "cde345", state);
+	CellApp app4 = new CellApp(456789, server, "def456", state);
 	
 	@BeforeEach
 	protected void setUp() {
@@ -41,42 +41,69 @@ public class appTest {
 	
 	@Test
 	public void testGetActiveLisencePlate() {
-		String lisencePlate = app1.getActiveLisencePlate();
-		assertNull(lisencePlate);
-		Instant fixedClock = Instant.parse("2020-11-03T19:15:00Z");
-		when(clock.instant()).thenReturn(fixedClock);
-		app1.startParking("abc123");
-		lisencePlate = app1.getActiveLisencePlate();
-		assertEquals(lisencePlate, "abc123");
+			String lisencePlate = app1.getActiveLisencePlate();
+			assertNull(lisencePlate);
+			app1.startParking("abc123");
+			lisencePlate = app1.getActiveLisencePlate();
+			assertEquals(lisencePlate, "abc123");
 	}
 	
 	@Test
 	public void testStartParking() {
-		Instant fixedClock = Instant.parse("2020-11-03T19:15:00Z");
-		when(clock.instant()).thenReturn(fixedClock);
-		String parking1 = app1.startParking("abc123");
-		String parking2 = app2.startParking("bcd234");
-		String parking3 = app3.startParking("cde345");
-		String parking4 = app4.startParking("def456");
-		assertEquals(parking1, "Horario de inicio: 16:15:00, horario máximo: 19:15:00");
-		assertEquals(parking2, "Horario de inicio: 16:15:00, horario máximo: 20:00:00");
-		assertEquals(parking3, "Saldo insuficiente. Estacionamiento no permitido.");
-		assertEquals(parking4, "Horario de inicio: 16:15:00, horario máximo: 20:00:00");
+		LocalTime horaActual = LocalTime.of(16, 15, 00);
+		try (MockedStatic<LocalTime> date = Mockito.mockStatic(LocalTime.class, Mockito.CALLS_REAL_METHODS)) {
+			date.when(LocalTime::now).thenReturn(horaActual);
+			String parking1 = app1.startParking("abc123");
+			String parking2 = app2.startParking("bcd234");
+			String parking3 = app3.startParking("cde345");
+			String parking4 = app4.startParking("def456");
+			assertEquals(parking1, "Horario de inicio: 16:15:00, horario máximo: 19:15:00");
+			assertEquals(parking2, "Horario de inicio: 16:15:00, horario máximo: 20:00:00");
+			assertEquals(parking3, "Saldo insuficiente. Estacionamiento no permitido.");
+			assertEquals(parking4, "Horario de inicio: 16:15:00, horario máximo: 20:00:00");
+		}
 	}
 	
 	@Test
 	public void testEndParking() {
-		Instant fixedClock = Instant.parse("2020-11-03T21:45:00Z");
-		when(server.getParkingManager()).thenReturn(pkm);
-		when(pkm.getParking(null)).thenReturn(parking);
-		when(parking.getStart()).thenReturn(LocalTime.of(16,15,00), LocalTime.of(16,46,00));
-		when(clock.instant()).thenReturn(fixedClock);
-		String parking1 = app1.endParking();
-		String parking2 = app2.endParking();
-		assertEquals(parking1, "Horario de inicio: 16:15:00, horario de finalizacion: 18:45:00, duracion: 2.0 horas, costo: 80.0");
-		assertEquals(parking2, "Horario de inicio: 16:46:00, horario de finalizacion: 18:45:00, duracion: 1.0 horas, costo: 40.0");
+		LocalDateTime startTime1 = LocalDateTime.of(2020, 11, 3, 16, 15, 00);
+		LocalDateTime startTime2 = LocalDateTime.of(2020, 11, 3, 16, 46, 00);
+		LocalTime horaActual = LocalTime.of(18, 45, 00);
+		try (MockedStatic<LocalTime> date = Mockito.mockStatic(LocalTime.class, Mockito.CALLS_REAL_METHODS)) {
+			when(server.getParking(null)).thenReturn(parking);
+			when(parking.getStartTime()).thenReturn(startTime1, startTime2);
+			date.when(LocalTime::now).thenReturn(horaActual);
+			String parking1 = app1.endParking();
+			String parking2 = app2.endParking();
+			assertEquals(parking1, "Horario de inicio: 16:15:00, horario de finalizacion: 18:45:00, duracion: 2.0 horas, costo: 80.0");
+			assertEquals(parking2, "Horario de inicio: 16:46:00, horario de finalizacion: 18:45:00, duracion: 1.0 horas, costo: 40.0");
+		}
 	};
 
+	@Test
+	public void testCalcHoraMaxima() {
+		LocalTime horaMaxima1 = app1.calcHoraMaxima(3, LocalTime.of(15, 45, 00));
+		LocalTime horaMaxima2 = app2.calcHoraMaxima(6, LocalTime.of(15, 45, 00));
+		LocalTime horaMaxima3 = app3.calcHoraMaxima(15, LocalTime.of(15, 45, 00));
+		System.out.print(horaMaxima3);
+		assertEquals(horaMaxima1, LocalTime.of(18, 45, 00));
+		assertEquals(horaMaxima2, LocalTime.of(20, 00, 00));
+		assertEquals(horaMaxima3, LocalTime.of(20, 00, 00));
+	}
+	
+	@Test
+	public void testCalcHoraActual() {
+		
+	}
+	
+	@Test
+	public void testCalcDuration() {
+		float duration1 = app1.calcDuration(LocalTime.of(16, 45), LocalTime.of(19, 00));
+		float duration2 = app2.calcDuration(LocalTime.of(16, 45), LocalTime.of(19, 55));
+		assertEquals(duration1, 2, 0);
+		assertEquals(duration2, 3, 0);
+	}
+	
 	@Test
 	public void testLoadBalance() {
 		float saldoPrevio = app3.checkBalance();
@@ -105,7 +132,7 @@ public class appTest {
 	
 	@Test
 	public void testOn_gps_update() {
-		app1.on_gps_update("caminando");
+		app1.onGpsUpdate("caminando");
 		verify(app1.getState()).handle("caminando", app1, "abc123");;
 	}
 }

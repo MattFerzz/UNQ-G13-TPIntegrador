@@ -16,7 +16,7 @@ public class AppParking extends Parking {
 		return !isFinished;
 	}
 
-	public Integer getNumberPhone() {
+	public Integer getPhoneNumber() {
 		return phoneNumber;
 	}
 

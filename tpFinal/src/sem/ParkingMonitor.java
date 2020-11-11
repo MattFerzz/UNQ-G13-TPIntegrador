@@ -5,6 +5,7 @@ public class ParkingMonitor {
 	
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	
+<<<<<<< HEAD
 	public void attach(Observer observer) {
 		observers.add(observer);
 	}
@@ -14,6 +15,17 @@ public class ParkingMonitor {
 	}
 
 	public void notify(Parking aParking) {
+=======
+	public void Attach(Observer observer) {
+		observers.add(observer);
+	}
+	
+	public void Detach(Observer observer) {
+		observers.remove(observer);
+	}
+
+	public void Notify() {
+>>>>>>> refs/heads/RamaDeLautaro
 		for(Observer observer : observers) {
 			observer.update();
 		}

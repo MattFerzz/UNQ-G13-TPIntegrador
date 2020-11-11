@@ -16,6 +16,7 @@ public abstract class Parking {
 	
 	public abstract void finish();
 
+<<<<<<< HEAD
 	
 	public String getLicensePlate() {
 		return licensePlate;
@@ -35,4 +36,24 @@ public abstract class Parking {
 		this.finishTime = finishTime;
 	}
 
+=======
+	public abstract void setOutput(String o);
+
+	
+	public String getLicensePlate() {
+		return licensePlate;
+	}
+
+	public LocalDateTime getStartTime() {
+		return startTime;
+	}
+	
+	public LocalDateTime getFinishTime() {
+		return finishTime;
+	}
+	
+	public void setFinishTime(LocalDateTime finish) {
+		this.finishTime = finish;
+	}	
+>>>>>>> refs/heads/RamaDeLautaro
 }

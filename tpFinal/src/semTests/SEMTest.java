@@ -6,6 +6,7 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.Test;
 
+import sem.MeasuredParkingZone;
 import sem.Parking;
 import sem.ParkingManager;
 import sem.ParkingMonitor;
@@ -23,7 +24,6 @@ public class SEMTest {
 	
 	SEM server = new SEM(prkZnManager, prchManager, prkManager, prkMonitor);
 	
-	
 	@Test
 	public void testCloseAllParkings() {
 		server.closeAllParkings();
@@ -37,13 +37,22 @@ public class SEMTest {
 	}
 	
 	@Test
-	public void testGetParkingManager() {
-		assertSame(server.getParkingManager(), prkManager);
+	public void testGetParking() {
+		server.getParking("abc123");
+		verify(prkManager).getParking("abc123");
 	}
 	
 	@Test
-	public void testGetPurchaseManager() {
-		assertSame(server.getPurchaseManager(), prchManager);
+	public void testFinishParking() {
+		server.finishParking("abc123", "output");
+		verify(prkManager).finishParking("abc123", "output");
+	}
+	
+	@Test
+	public void testGenerateParkingPurchase() {
+		MeasuredParkingZone zone = mock(MeasuredParkingZone.class);
+		server.generateParkingPurchase(zone, 5, "abc123");
+		verify(prchManager).generateParkingPurchase(zone, 5, "abc123");
 	}
 	
 	@Test
