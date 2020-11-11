@@ -5,15 +5,15 @@ public class ParkingMonitor {
 	
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	
-	public void Attach(Observer observer) {
+	public void attach(Observer observer) {
 		observers.add(observer);
 	}
 	
-	public void Detach(Observer observer) {
+	public void detach(Observer observer) {
 		observers.remove(observer);
 	}
 
-	public void Notify() {
+	public void notify(Parking aParking) {
 		for(Observer observer : observers) {
 			observer.update();
 		}

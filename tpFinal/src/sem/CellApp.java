@@ -57,7 +57,7 @@ public class CellApp {
 		float duration = (pStart.getMinute() > horaActual.getMinute()) ?
 				         horaActual.getHour() - pStart.getHour() - 1:
 					     horaActual.getHour() - pStart.getHour();
-		server.getParkingManager().finishParking(activeLisencePlate);
+		server.finishParking(activeLisencePlate);
 		activeLisencePlate = null;
 		return "Horario de inicio: " + pStart.format(dateFrmt) + ", horario de finalizacion: " + horaActual.format(dateFrmt) + ", duracion: " + duration + " horas, costo: " + duration*40;
 	}

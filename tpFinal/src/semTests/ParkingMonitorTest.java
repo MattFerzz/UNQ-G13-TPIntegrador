@@ -17,7 +17,7 @@ public class ParkingMonitorTest {
 	
 	@BeforeEach
 	public void setUp() {
-		sut.Attach(o);		
+		sut.attach(o);		
 	}
 	
 	@Test
@@ -27,14 +27,14 @@ public class ParkingMonitorTest {
 
 	@Test
 	public void testDetach() {
-		sut.Detach(o);
+		sut.detach(o);
 		assertEquals(sut.getObservers().size(), 0);
 	}
 
 	@Test
 	public void testNotify() {
-		sut.Notify();
-		verify(o).Update();
+		sut.notify();
+		verify(o).update();
 	}
 	
 }

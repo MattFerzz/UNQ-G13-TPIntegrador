@@ -1,13 +1,13 @@
 package sem;
 
 
-public class ParkingCardStore {
+public class ParkingStore {
 
 	private Coordinate location;
 	private MeasuredParkingZone parkingZone;
 	private SEM system;
 	
-	public ParkingCardStore(Coordinate location, MeasuredParkingZone parkingZone) {
+	public ParkingStore(Coordinate location, MeasuredParkingZone parkingZone) {
 		this.parkingZone = parkingZone;
 		this.location = location;
 	}

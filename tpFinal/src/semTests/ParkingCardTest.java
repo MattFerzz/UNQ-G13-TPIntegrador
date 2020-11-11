@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 import sem.Coordinate;
 import sem.MeasuredParkingZone;
-import sem.ParkingCardStore;
+import sem.ParkingStore;
 
-class ParkingCardStoreTest {
-	private ParkingCardStore parkingStore;
+class ParkingCardTest {
+	private ParkingStore parkingStore;
 	private Coordinate location;
 	private MeasuredParkingZone parkingZone;
 	@BeforeEach

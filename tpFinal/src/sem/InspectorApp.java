@@ -18,11 +18,12 @@ public class InspectorApp {
 	}
 	
 	public Boolean hasValidParkingCard(String aLicensePlate) {
-		return system.getParkingManager.hasValidParkingCard(aLicensePlate);
+		return system.hasValidParking(aLicensePlate);
 	}
 	
-	public void generateParkingTicketFor(String aLicensePlate) {
-		system.generateParkingTicketFor(String aLicensePlate,MeasuredParkingZone parkingZone,String inspectorName);
+	public ParkingTicket generateParkingTicketFor(String aLicensePlate) {
+		return system.generateParkingTicketFor( aLicensePlate, parkingZone, this);
+		
 	}
 	
 	
