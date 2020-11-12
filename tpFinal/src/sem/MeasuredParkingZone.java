@@ -6,21 +6,25 @@ import org.eclipse.collections.api.tuple.*;
 
 public class MeasuredParkingZone {
 
-	private MutableList<ParkingCardStore> parkingCardStores;
+	private MutableList<ParkingStore> parkingStores;
 	private String description;
 	private Pair<Coordinate, Coordinate> boundaries;
-	public MeasuredParkingZone( String description,Pair<Coordinate, Coordinate> boundaries) {
+	private SEM system;
+
+	public MeasuredParkingZone(String description, Pair<Coordinate, Coordinate> boundaries, SEM system) {
 		this.description = description;
 		this.boundaries = boundaries;
-		this.parkingCardStores = Lists.mutable.empty();
+		this.system = system;
+		this.parkingStores = Lists.mutable.empty();
+
 	}
 
-	public void registerParkingCardStore(Coordinate location) {
-		parkingCardStores.add(new ParkingCardStore(location, this));
+	public void registerParkingStore(Coordinate location) {
+		parkingStores.add(new ParkingStore(location, this, system));
 	}
-	
-	public MutableList<ParkingCardStore> getParkingCardStores() {
-		return parkingCardStores;
+
+	public MutableList<ParkingStore> getParkingStores() {
+		return parkingStores;
 	}
 
 	public String getdesctiption() {
@@ -29,18 +33,6 @@ public class MeasuredParkingZone {
 
 	public Pair<Coordinate, Coordinate> getBoundaries() {
 		return boundaries;
-	}
-	
-	public void registerParking(Parking parking) {
-		parkings.add(parking);
-	}
-	
-	public MutableList<Parking> getParkings(){
-		return parkings;
-	}
-	
-	public MutableList<Parking> getActiveParkings(){
-		 return parkings.select(eachParking -> eachParking.isValid());
 	}
 
 }

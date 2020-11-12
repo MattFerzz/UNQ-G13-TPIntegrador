@@ -31,8 +31,8 @@ public abstract class Parking {
 		return finishTime;
 	}
 	
-	public void setFinishTime(LocalDateTime finish) {
-		this.finishTime = finish;
+	protected void setFinishTime(LocalDateTime finishTime) {
+		this.finishTime = finishTime;
 	}
 
 }

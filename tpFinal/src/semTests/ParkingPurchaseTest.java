@@ -14,7 +14,7 @@ import sem.ParkingPurchase;
 public class ParkingPurchaseTest {
 
 	private MeasuredParkingZone zone = mock(MeasuredParkingZone.class);
-	private ParkingPurchase sut = new ParkingPurchase(3, zone, LocalDateTime.now(), 5);
+	private ParkingPurchase sut = new ParkingPurchase(3L, zone, LocalDateTime.now(), 5);
 	
 	@Test 
 	public void testGetHours() {

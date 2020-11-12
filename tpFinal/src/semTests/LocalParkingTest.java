@@ -4,54 +4,59 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.time.Clock;
-import java.time.Instant;
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
 
 import sem.LocalParking;
 import sem.Purchase;
 
 public class LocalParkingTest {
-	private Clock clock = mock(Clock.class);
 	private Purchase purchase = mock(Purchase.class);
-	private LocalParking sut = new LocalParking("AA55BB", LocalDateTime.of(2020, 11, 4, 13, 45), purchase, LocalDateTime.of(2020,11,4,16,45), clock);
+	private LocalParking sut = new LocalParking("AA55BB", LocalDateTime.of(2020, 11, 4, 13, 45), purchase, LocalDateTime.of(2020,11,4,16,45));
 
 	@Test
 	public void testIsValid() {
-		Instant fixedClock1 = Instant.parse("2020-11-04T22:45:00Z");
-        Instant fixedClock2 = Instant.parse("2020-11-04T18:45:00Z");
-        when(clock.instant()).thenReturn(fixedClock1, fixedClock2);
-        assertTrue(sut.isValid());
-        assertFalse(sut.isValid());
+		LocalDateTime dateTime1 = LocalDateTime.of(2020, 11, 4, 19, 45, 00);
+		LocalDateTime dateTime2 = LocalDateTime.of(2020, 11, 4, 15, 45, 00);
+		try (MockedStatic<LocalDateTime> fixedDateTime = Mockito.mockStatic(LocalDateTime.class, Mockito.CALLS_REAL_METHODS)) {
+			fixedDateTime.when(LocalDateTime::now).thenReturn(dateTime1, dateTime2);
+			assertTrue(sut.isValid());
+			assertFalse(sut.isValid());
+		}
 	}
+	
 	
 
 	@Test
 	public void testGetLicensePlate() {
-		String lp = sut.getLicensePlate();
-		assertEquals(lp, "AA55BB");
+		String licensePlate = sut.getLicensePlate();
+		assertEquals(licensePlate, "AA55BB");
 	}
 	
 	@Test
-	public void testGetStart() {
-        LocalDateTime date = sut.getStart();
-        assertEquals(date, LocalDateTime.of(2020, 11, 4, 13, 45)); 
+	public void testGetStartTime() {
+        LocalDateTime dateTime = sut.getStartTime();
+        assertEquals(dateTime, LocalDateTime.of(2020, 11, 4, 13, 45)); 
 	}
 	
 	@Test 
-	public void testGetFinish() {
-        LocalDateTime date = sut.getFinishTime();
-        assertEquals(date, LocalDateTime.of(2020,11,4,16,45));
+	public void testGetFinishTime() {
+        LocalDateTime dateTime = sut.getFinishTime();
+        assertEquals(dateTime, LocalDateTime.of(2020,11,4,16,45));
 	}
 	
 	@Test
-	public void testSetFinish() {
-		sut.setFinish(LocalDateTime.of(2020,11,4,22,45)); 
-		LocalDateTime date = sut.getFinishTime();
-		assertEquals(date,LocalDateTime.of(2020,11,4,22,45));
+	public void testGetPurchase() {
+		assertEquals(purchase, sut.getPurchase());
+	}
+	
+	@Test
+	public void testFinish() {
+		assertEquals(LocalDateTime.of(2020,11,4,16,45), sut.getFinishTime());
+		sut.finish();
+		assertEquals(LocalDateTime.of(2020,11,4,16,45), sut.getFinishTime());
 	}
 }

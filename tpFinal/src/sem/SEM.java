@@ -1,38 +1,57 @@
 package sem;
-import java.util.ArrayList;
+
+import org.eclipse.collections.api.list.MutableList;
 
 public class SEM {
 
-	private ParkingZoneManager  zones;
-	private PurchaseManager     purchases;
-	private ParkingManager      parkings;
-	private ParkingMonitor      observer;
-	
-	public SEM(ParkingZoneManager z, PurchaseManager pur, ParkingManager prk, ParkingMonitor obs) {
-		zones = z;
-		purchases = pur;
-		parkings = prk;
-		observer = obs;
+	private ParkingZoneManager zoneManager;
+	private PurchaseManager purchaseManager;
+	private ParkingManager parkingManager;
+	private ParkingMonitor parkingMonitor;
+
+	public SEM(ParkingZoneManager zoneManager, PurchaseManager purchaseManager, ParkingManager parkingManager,
+			ParkingMonitor parkingMonitor) {
+		this.zoneManager = zoneManager;
+		this.purchaseManager = purchaseManager;
+		this.parkingManager = parkingManager;
+		this.parkingMonitor = parkingMonitor;
 	}
 
 	public void closeAllParkings() {
-		parkings.closeAllParkings();
+		parkingManager.closeAllParkings();
 	}
-	
-	public void Notify() {
-		observer.Notify();
+
+	public void notify(Parking aParking) {
+		parkingMonitor.notify(aParking);
 	}
-	
+
+	public MutableList<MeasuredParkingZone> getParkingZones() {
+		return zoneManager.getParkingZones();
+	}
+
 	public Parking getParking(String aLicensePlate) {
-		return parkings.getParking(aLicensePlate);
+		return parkingManager.getParking(aLicensePlate);
 	}
-	
-	public void generateParkingPurchase( MeasuredParkingZone zone, Integer hours, String licensePlate) {
-		purchases.generateParkingPurchase(zone, hours, licensePlate);
+
+	public void finishParking(String lisencePlate, String output) {
+		parkingManager.finishParking(lisencePlate, output);
 	}
-	
-	
-	public void registerParking(Parking p) {
-		parkings.registerParking(p);
+
+	public void generateParkingPurchase(MeasuredParkingZone zone, Integer hours, String licensePlate) {
+		purchaseManager.generateParkingPurchase(zone, hours, licensePlate);
+	}
+
+	public Boolean hasValidParking(String licensePlate) {
+		return parkingManager.hasValidParking(licensePlate);
+	}
+
+	public void registerParking(Parking parking) {
+		parkingManager.registerParking(parking);
+	}
+
+	public ParkingTicket generateParkingTicketFor(String aLicensePlate, MeasuredParkingZone parkingZone,
+			InspectorApp inspectorApp) {
+		return parkingManager.generateParkingTicketFor(aLicensePlate, parkingZone, inspectorApp);
+
 	}
 }

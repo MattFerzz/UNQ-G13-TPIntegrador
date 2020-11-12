@@ -12,7 +12,7 @@ import sem.MeasuredParkingZone;
 
 public class BalanceRechargeTest {
 	private MeasuredParkingZone zone = mock(MeasuredParkingZone.class);
-	private BalanceRecharge sut = new BalanceRecharge(5, zone, LocalDateTime.now(), 1155662233, 50);
+	private BalanceRecharge sut = new BalanceRecharge(5, zone, LocalDateTime.now(), 1155662233, 50F);
 
 	@Test
 	public void testGetPhoneNumber() {
@@ -22,8 +22,8 @@ public class BalanceRechargeTest {
 	
 	@Test 
 	public void testGetMount() {
-		Float mount =sut.getMount();
-		assertEquals(mount, 50, 0);
+		Float mount =sut.getAmount();
+		assertEquals(mount, 50F, 0);
 	}
 }
 

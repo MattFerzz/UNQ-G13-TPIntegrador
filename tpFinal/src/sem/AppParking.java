@@ -1,26 +1,23 @@
 package sem;
 
-import java.time.Clock;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 public class AppParking extends Parking {
-	private Integer numberPhone;
+	private Integer phoneNumber;
 	private String output;
 	private boolean isFinished = false; 
 	
-	public AppParking(Integer numberPhone, String licensePlate, LocalDateTime start) {
-		super(licensePlate, start);
-		this.numberPhone = numberPhone;
-		this.output = output;
+	public AppParking(Integer phoneNumber, String licensePlate, LocalDateTime startTime) {
+		super(licensePlate, startTime);
+		this.phoneNumber = phoneNumber;
 	}
 	
 	public boolean isValid() {
 		return !isFinished;
 	}
 
-	public Integer getNumberPhone() {
-		return numberPhone;
+	public Integer getPhoneNumber() {
+		return phoneNumber;
 	}
 
 	public String getOutput() {

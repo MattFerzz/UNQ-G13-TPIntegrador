@@ -6,8 +6,8 @@ public class ParkingPurchase extends Purchase {
 
 	private Integer hours;
 
-	public ParkingPurchase(long id, MeasuredParkingZone zone, LocalDateTime date, Integer hours) {
-		super(id, zone, date);
+	public ParkingPurchase(Long id, MeasuredParkingZone parkingZone, LocalDateTime date, Integer hours) {
+		super(id, parkingZone, date);
 		this.hours = hours;	
 	}
 	

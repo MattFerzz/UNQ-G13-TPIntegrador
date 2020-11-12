@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 public class BalanceRecharge extends Purchase {
 
 	private Integer phoneNumber; 
-	private float amount;
+	private Float amount;
 	
-	public BalanceRecharge(long id, MeasuredParkingZone zone, LocalDateTime date, Integer phoneNumber, float amount) {
+	public BalanceRecharge(long id, MeasuredParkingZone zone, LocalDateTime date, Integer phoneNumber, Float amount) {
 		super(id, zone, date);
 		this.phoneNumber = phoneNumber;
 		this.amount = amount;
@@ -17,7 +17,7 @@ public class BalanceRecharge extends Purchase {
 		return phoneNumber;
 	}
 	
-	public float getMount() {
+	public Float getAmount() {
 		return amount;
 	} 
 	
