@@ -7,18 +7,17 @@ public class ParkingManager {
 	private MutableList<Parking> parkings;
 	private SEM server;
 	private MutableList<ParkingTicket> parkingTickets;
-	
 
 	public ParkingManager(SEM server) {
 		this.server = server;
-		this. parkings = Lists.mutable.empty();
-		this. parkingTickets = Lists.mutable.empty();
+		this.parkings = Lists.mutable.empty();
+		this.parkingTickets = Lists.mutable.empty();
 	}
 
 	public MutableList<Parking> getValidParkings() {
 		return parkings.select(eachParking -> eachParking.isValid());
 	}
-	
+
 	public MutableList<Parking> getParkings() {
 		return parkings;
 	}
@@ -46,16 +45,17 @@ public class ParkingManager {
 		parking.finish();
 	}
 
-	public ParkingTicket generateParkingTicketFor(String aLicensePlate, MeasuredParkingZone aParkingZone, InspectorApp inspectorApp) {
+	public ParkingTicket generateParkingTicketFor(String aLicensePlate, MeasuredParkingZone aParkingZone,
+			InspectorApp inspectorApp) {
 		ParkingTicket parkingTicket = new ParkingTicket(aLicensePlate, aParkingZone, inspectorApp);
 		parkingTickets.add(parkingTicket);
 		return parkingTicket;
 	}
-	
-	public MutableList<ParkingTicket> getParkingTickets(){
+
+	public MutableList<ParkingTicket> getParkingTickets() {
 		return parkingTickets;
 	}
-	
+
 	public MutableList<ParkingTicket> getParkingTicketsFor(String aLicensePlate) {
 		return parkingTickets.select(eachTicket -> eachTicket.getInfringingLicensePlate() == aLicensePlate);
 	}
