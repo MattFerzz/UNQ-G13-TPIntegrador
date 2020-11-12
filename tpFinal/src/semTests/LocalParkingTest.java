@@ -19,10 +19,10 @@ public class LocalParkingTest {
 
 	@Test
 	public void testIsValid() {
-		LocalDateTime horaActual1 = LocalDateTime.of(2020, 11, 4, 19, 45, 00);
-		LocalDateTime horaActual2 = LocalDateTime.of(2020, 11, 4, 15, 45, 00);
-		try (MockedStatic<LocalDateTime> date = Mockito.mockStatic(LocalDateTime.class, Mockito.CALLS_REAL_METHODS)) {
-			date.when(LocalDateTime::now).thenReturn(horaActual1, horaActual2);
+		LocalDateTime dateTime1 = LocalDateTime.of(2020, 11, 4, 19, 45, 00);
+		LocalDateTime dateTime2 = LocalDateTime.of(2020, 11, 4, 15, 45, 00);
+		try (MockedStatic<LocalDateTime> fixedDateTime = Mockito.mockStatic(LocalDateTime.class, Mockito.CALLS_REAL_METHODS)) {
+			fixedDateTime.when(LocalDateTime::now).thenReturn(dateTime1, dateTime2);
 			assertTrue(sut.isValid());
 			assertFalse(sut.isValid());
 		}
@@ -32,20 +32,20 @@ public class LocalParkingTest {
 
 	@Test
 	public void testGetLicensePlate() {
-		String lp = sut.getLicensePlate();
-		assertEquals(lp, "AA55BB");
+		String licensePlate = sut.getLicensePlate();
+		assertEquals(licensePlate, "AA55BB");
 	}
 	
 	@Test
 	public void testGetStartTime() {
-        LocalDateTime date = sut.getStartTime();
-        assertEquals(date, LocalDateTime.of(2020, 11, 4, 13, 45)); 
+        LocalDateTime dateTime = sut.getStartTime();
+        assertEquals(dateTime, LocalDateTime.of(2020, 11, 4, 13, 45)); 
 	}
 	
 	@Test 
 	public void testGetFinishTime() {
-        LocalDateTime date = sut.getFinishTime();
-        assertEquals(date, LocalDateTime.of(2020,11,4,16,45));
+        LocalDateTime dateTime = sut.getFinishTime();
+        assertEquals(dateTime, LocalDateTime.of(2020,11,4,16,45));
 	}
 	
 	@Test

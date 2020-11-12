@@ -1,17 +1,19 @@
 package sem;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import org.eclipse.collections.api.factory.Lists;
+import org.eclipse.collections.api.list.MutableList;
 
 
 public class PurchaseManager {
 
 	private SEM server; 
 	private long controlNumber = 0;
-	private ArrayList<Purchase> purchases = new ArrayList<Purchase>();
+	private MutableList<Purchase> purchases;
 
 	public PurchaseManager(SEM server){
 		this.server = server;
+		this.purchases = Lists.mutable.empty();
 	}
 
 	public void generateParkingPurchase( MeasuredParkingZone zone, Integer hours, String licensePlate){
@@ -33,7 +35,7 @@ public class PurchaseManager {
 		return controlNumber;
 	}
 	
-	public ArrayList<Purchase> getPurchases(){
+	public MutableList<Purchase> getPurchases(){
 		return purchases;
 	}
 	

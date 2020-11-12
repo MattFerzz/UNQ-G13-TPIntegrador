@@ -11,8 +11,8 @@ import sem.MeasuredParkingZone;
 import sem.Purchase;
 public class PurchaseTest {
 	private MeasuredParkingZone zone = mock(MeasuredParkingZone.class);
-	private LocalDateTime date = LocalDateTime.now();
-	private Purchase sut = new Purchase(3, zone, date);
+	private LocalDateTime dateTime = LocalDateTime.now();
+	private Purchase sut = new Purchase(3L, zone, dateTime);
 
 	@Test
 	
@@ -22,14 +22,14 @@ public class PurchaseTest {
 	}
 	
 	@Test
-	public void testGetZone() {
-		MeasuredParkingZone z = sut.getZone();
-		assertEquals(z, zone);
+	public void testGetParkingZone() {
+		MeasuredParkingZone parkingZone = sut.getParkingZone();
+		assertEquals(parkingZone, zone);
 	}
 	
 	@Test
 	public void testGetDate() {
-		LocalDateTime d = sut.getDate();
-		assertEquals(d, date);
+		LocalDateTime date = sut.getDateTime();
+		assertEquals(date, dateTime);
 	}
 }

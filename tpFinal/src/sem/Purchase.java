@@ -4,26 +4,26 @@ import java.time.LocalDateTime;
 
 public class Purchase {
 
-	private long id;
+	private Long id;
 	private MeasuredParkingZone zone; 
-	private LocalDateTime date;
+	private LocalDateTime dateTime;
 	
-	public Purchase(long id, MeasuredParkingZone zone, LocalDateTime date) {
+	public Purchase(Long id, MeasuredParkingZone parkingZone, LocalDateTime dateTime) {
 		this.id = id;
-		this.zone = zone;
-		this.date = date;
+		this.zone = parkingZone;
+		this.dateTime = dateTime;
 	}
 	
 	public long getId() {
 		return id;
 	}
 
-	public MeasuredParkingZone getZone() {
+	public MeasuredParkingZone getParkingZone() {
 		return zone;
 	}
 
-	public LocalDateTime getDate() {
-		return date;
+	public LocalDateTime getDateTime() {
+		return dateTime;
 	}
 
 }

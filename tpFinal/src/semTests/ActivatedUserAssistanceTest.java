@@ -8,10 +8,10 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 
 import sem.ActivatedUserAssistance;
-import sem.CellApp;
+import sem.CellPhoneApp;
 public class ActivatedUserAssistanceTest {
 	private ActivatedUserAssistance sut = new ActivatedUserAssistance();
-	private CellApp app = mock(CellApp.class);
+	private CellPhoneApp app = mock(CellPhoneApp.class);
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
 	
 	

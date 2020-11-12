@@ -2,7 +2,7 @@ package sem;
 
 public class ActivatedUserAssistance extends UserAssistance {
 	
-	public void handle(String updateType, CellApp app, String licensePlate) {
+	public void handle(String updateType, CellPhoneApp app, String licensePlate) {
 		if (updateType == "Caminando"){
 			app.startParking(licensePlate);
 			System.out.print("Estacionamiento Iniciado");

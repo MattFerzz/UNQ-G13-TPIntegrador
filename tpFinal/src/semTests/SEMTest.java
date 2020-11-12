@@ -16,62 +16,62 @@ import sem.SEM;
 
 public class SEMTest {
 
-	ParkingZoneManager prkZnManager = mock(ParkingZoneManager.class);
-	ParkingManager prkManager = mock(ParkingManager.class);
-	PurchaseManager prchManager = mock(PurchaseManager.class);
-	ParkingMonitor prkMonitor = mock(ParkingMonitor.class);
+	ParkingZoneManager parkingZoneManager = mock(ParkingZoneManager.class);
+	ParkingManager parkingManager = mock(ParkingManager.class);
+	PurchaseManager purchaseManager = mock(PurchaseManager.class);
+	ParkingMonitor parkingMonitor = mock(ParkingMonitor.class);
 
-	SEM server = new SEM(prkZnManager, prchManager, prkManager, prkMonitor);
+	SEM server = new SEM(parkingZoneManager, purchaseManager, parkingManager, parkingMonitor);
 
 	@Test
 	public void testCloseAllParkings() {
 		server.closeAllParkings();
-		verify(prkManager).closeAllParkings();
+		verify(parkingManager).closeAllParkings();
 	}
 
 	@Test
 	public void testNotify() {
 		Parking parking = mock(Parking.class);
 		server.notify(parking);
-		verify(prkMonitor).notify(parking);
+		verify(parkingMonitor).notify(parking);
 	}
 
 	@Test
 	public void testGetParkingZones() {
 		server.getParkingZones();
-		verify(prkZnManager).getParkingZones();
+		verify(parkingZoneManager).getParkingZones();
 	}
 
 	@Test
 	public void testGetParking() {
 		server.getParking("abc123");
-		verify(prkManager).getParking("abc123");
+		verify(parkingManager).getParking("abc123");
 	}
 
 	@Test
 	public void testFinishParking() {
 		server.finishParking("abc123", "output");
-		verify(prkManager).finishParking("abc123", "output");
+		verify(parkingManager).finishParking("abc123", "output");
 	}
 
 	@Test
 	public void testGenerateParkingPurchase() {
 		MeasuredParkingZone zone = mock(MeasuredParkingZone.class);
 		server.generateParkingPurchase(zone, 5, "abc123");
-		verify(prchManager).generateParkingPurchase(zone, 5, "abc123");
+		verify(purchaseManager).generateParkingPurchase(zone, 5, "abc123");
 	}
 
 	@Test
 	public void testRegisterParking() {
 		Parking p = mock(Parking.class);
 		server.registerParking(p);
-		verify(prkManager).registerParking(p);
+		verify(parkingManager).registerParking(p);
 	}
 
 	@Test
 	public void testHasValidParking() {
 		server.hasValidParking("AA403BG");
-		verify(prkManager).hasValidParking("AA403BG");
+		verify(parkingManager).hasValidParking("AA403BG");
 	}
 
 	@Test
@@ -79,6 +79,6 @@ public class SEMTest {
 		MeasuredParkingZone parkingZone = mock(MeasuredParkingZone.class);
 		InspectorApp inspectorApp = mock(InspectorApp.class);
 		server.generateParkingTicketFor("AA403BG", parkingZone, inspectorApp);
-		verify(prkManager).generateParkingTicketFor("AA403BG", parkingZone, inspectorApp);
+		verify(parkingManager).generateParkingTicketFor("AA403BG", parkingZone, inspectorApp);
 	}
 }

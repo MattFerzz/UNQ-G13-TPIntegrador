@@ -15,11 +15,11 @@ public class ParkingMonitorTest {
 
 	ParkingMonitor sut = new ParkingMonitor();
 	
-	Observer o = mock(Observer.class);
+	Observer observer = mock(Observer.class);
 	
 	@BeforeEach
 	public void setUp() {
-		sut.attach(o);		
+		sut.attach(observer);		
 	}
 	
 	@Test
@@ -29,7 +29,7 @@ public class ParkingMonitorTest {
 
 	@Test
 	public void testDetach() {
-		sut.detach(o);
+		sut.detach(observer);
 		assertEquals(sut.getObservers().size(), 0);
 	}
 
@@ -37,7 +37,7 @@ public class ParkingMonitorTest {
 	public void testNotify() {
 		Parking mockParking = Mockito.mock(Parking.class);
 		sut.notify(mockParking);
-		verify(o).update(mockParking);
+		verify(observer).update(mockParking);
 	}
 	
 }

@@ -2,6 +2,6 @@ package sem;
 
 public abstract class UserAssistance {
 	
-	public abstract void handle(String updateType, CellApp app, String licensePlate);
+	public abstract void handle(String updateType, CellPhoneApp app, String licensePlate);
 
 }
