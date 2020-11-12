@@ -7,6 +7,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import sem.AppParking;
 import sem.InspectorApp;
 import sem.LocalParking;
 import sem.MeasuredParkingZone;
@@ -17,7 +19,6 @@ import sem.SEM;
 
 class ParkingManagerTest {
 	private SEM mockSystem;
-	private ParkingTicket mockTicket;
 	private ParkingManager parkingManager;
 	private Parking mockValidParking;
 	private Parking mockNonValidParking;
@@ -28,7 +29,6 @@ class ParkingManagerTest {
 	@BeforeEach
 	void setUp() {
 		mockSystem = Mockito.mock(SEM.class);
-		mockTicket = Mockito.mock(ParkingTicket.class);
 		parkingManager = new ParkingManager(mockSystem);
 		mockParkingZone = Mockito.mock(MeasuredParkingZone.class);
 		mockInspectorApp = Mockito.mock(InspectorApp.class);
@@ -91,10 +91,13 @@ class ParkingManagerTest {
 
 	@Test
 	void testFinishParking() {
-		parkingManager.registerParking(mockValidParking);
-		Mockito.when(mockValidParking.getLicensePlate()).thenReturn("AA506BG");
+		AppParking mockValidAppParking = Mockito.mock(AppParking.class);
+		Mockito.when(mockValidAppParking.isValid()).thenReturn(true);		
+		Mockito.when(mockValidAppParking.getLicensePlate()).thenReturn("AA506BG");
+		
+		parkingManager.registerParking(mockValidAppParking);
 		parkingManager.finishParking("AA506BG", "Estacionamiento Terminado");
-		verify(mockValidParking).finish();
+		verify(mockValidAppParking).finish();
 	}
 
 	@Test

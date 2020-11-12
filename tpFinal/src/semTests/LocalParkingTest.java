@@ -18,7 +18,7 @@ import sem.Purchase;
 public class LocalParkingTest {
 	private Clock clock = mock(Clock.class);
 	private Purchase purchase = mock(Purchase.class);
-	private LocalParking sut = new LocalParking("AA55BB", LocalDateTime.of(2020, 11, 4, 13, 45), purchase, LocalDateTime.of(2020,11,4,16,45), clock);
+	private LocalParking sut = new LocalParking("AA55BB", LocalDateTime.of(2020, 11, 4, 13, 45), purchase, LocalDateTime.of(2020,11,4,16,45));
 
 	@Test
 	public void testIsValid() {
@@ -48,10 +48,10 @@ public class LocalParkingTest {
         assertEquals(date, LocalDateTime.of(2020,11,4,16,45));
 	}
 	
-/*	@Test
-	public void testSetFinish() {
-		sut.setFinishTime(LocalDateTime.of(2020,11,4,22,45)); 
-		LocalDateTime date = sut.getFinishTime();
-		assertEquals(date,LocalDateTime.of(2020,11,4,22,45));
-	}*/
+	@Test
+	public void testFinish() {
+		assertEquals(LocalDateTime.of(2020,11,4,16,45), sut.getFinishTime());
+		sut.finish();
+		assertEquals(LocalDateTime.of(2020,11,4,16,45), sut.getFinishTime());
+	}
 }

@@ -3,8 +3,11 @@ package semTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 
 import sem.InspectorApp;
@@ -24,10 +27,14 @@ class ParkingTicketTest {
 		parkingTicket = new ParkingTicket("AA506BG", mockParkingZone, mockInspectorApp);
 	}
 
-
 	@Test
 	void testGetLicensePlate() {
 		assertEquals("AA506BG", parkingTicket.getInfringingLicensePlate());
+	}
+	
+	@Test
+	void testGetReportingInspectorApp() {
+		assertEquals(mockInspectorApp, parkingTicket.getReportingInspectorApp());
 	}
 
 	@Test
@@ -37,7 +44,13 @@ class ParkingTicketTest {
 
 	@Test
 	void testGetTimestamp() {
-		fail("FIX TIME.NOW");
+		LocalDateTime currentDateTime = LocalDateTime.of(2020, 11, 4, 16, 45);
+		try (MockedStatic<LocalDateTime> date = Mockito.mockStatic(LocalDateTime.class, Mockito.CALLS_REAL_METHODS)) {
+			date.when(LocalDateTime::now).thenReturn(currentDateTime);
+
+			ParkingTicket anotherTicket = new ParkingTicket("AA506BG", mockParkingZone, mockInspectorApp);
+			assertEquals(anotherTicket.getTimestamp(), LocalDateTime.of(2020, 11, 4, 16, 45));
+		}
 	}
 
 }

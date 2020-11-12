@@ -19,7 +19,7 @@ public class SEM {
 	}
 	
 	public void notify(Parking aParking) {
-		parkingMonitor.Notify();
+		parkingMonitor.notify(aParking);
 	}
 	
 	public Parking getParking(String aLicensePlate) {

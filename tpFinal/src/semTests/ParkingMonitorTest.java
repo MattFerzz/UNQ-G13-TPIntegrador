@@ -5,8 +5,10 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import sem.Observer;
+import sem.Parking;
 import sem.ParkingMonitor;
 
 public class ParkingMonitorTest {
@@ -33,8 +35,9 @@ public class ParkingMonitorTest {
 
 	@Test
 	public void testNotify() {
-		sut.notify();
-		verify(o).update();
+		Parking mockParking = Mockito.mock(Parking.class);
+		sut.notify(mockParking);
+		verify(o).update(mockParking);
 	}
 	
 }

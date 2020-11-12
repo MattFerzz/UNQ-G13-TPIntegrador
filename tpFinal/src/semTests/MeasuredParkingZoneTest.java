@@ -23,8 +23,6 @@ class MeasuredParkingZoneTest {
 	private ParkingStore parkingStore;
 	private Pair<Coordinate, Coordinate> boundaries;
 	private MeasuredParkingZone parkingZone;
-	private LocalParking mockParking;
-	private LocalParking anotherMockParking;
 	private String description;
 
 	@BeforeEach

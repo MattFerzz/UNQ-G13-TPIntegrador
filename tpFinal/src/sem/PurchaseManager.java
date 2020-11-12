@@ -19,7 +19,7 @@ public class PurchaseManager {
 		ParkingPurchase purchase = new ParkingPurchase(generateNextControlNumber(), zone, LocalDateTime.now(), hours);
 		purchases.add(purchase);
 		
-		LocalParking parking = new LocalParking(licensePlate, LocalDateTime.now(), purchase, LocalDateTime.now().plusHours((long)hours), Clock.systemDefaultZone());
+		LocalParking parking = new LocalParking(licensePlate, LocalDateTime.now(), purchase, LocalDateTime.now().plusHours((long)hours));
 		server.registerParking(parking);	
 	}
 

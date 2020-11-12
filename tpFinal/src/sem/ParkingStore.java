@@ -7,9 +7,10 @@ public class ParkingStore {
 	private MeasuredParkingZone parkingZone;
 	private SEM system;
 	
-	public ParkingStore(Coordinate location, MeasuredParkingZone parkingZone) {
+	public ParkingStore(Coordinate location, MeasuredParkingZone parkingZone, SEM system) {
 		this.parkingZone = parkingZone;
 		this.location = location;
+		this.system = system;
 	}
 	
 	public void sellParkingCard(String aLicensePlate, Integer hoursAmount) {

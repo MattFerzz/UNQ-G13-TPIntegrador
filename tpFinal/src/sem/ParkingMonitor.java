@@ -15,7 +15,7 @@ public class ParkingMonitor {
 
 	public void notify(Parking aParking) {
 		for(Observer observer : observers) {
-			observer.update();
+			observer.update(aParking);
 		}
 	}
 	
