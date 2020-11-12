@@ -139,6 +139,11 @@ public class CellPhoneAppTest {
 	}
 
 	@Test
+	public void testGetPhoneNumber() {
+		assertEquals((long) app1.getPhoneNumber(),(long) 123456);
+	}
+	
+	@Test
 	public void testOn_gps_update() {
 		app1.onGpsUpdate("caminando");
 		verify(app1.getState()).handle("caminando", app1, "abc123");

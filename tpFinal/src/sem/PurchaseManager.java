@@ -27,7 +27,7 @@ public class PurchaseManager {
 	public void generateBalanceRecharge(MeasuredParkingZone zone, Integer phoneNumber, Float amount) {
 		BalanceRecharge purchase = new BalanceRecharge(generateNextControlNumber(), zone, LocalDateTime.now(), phoneNumber, amount);
 		purchases.add(purchase);
-
+		server.loadBalance(phoneNumber, amount);
 	}
 	
 	public long generateNextControlNumber(){

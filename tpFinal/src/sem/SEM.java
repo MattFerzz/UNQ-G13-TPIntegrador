@@ -4,17 +4,19 @@ import org.eclipse.collections.api.list.MutableList;
 
 public class SEM {
 
-	private ParkingZoneManager zoneManager;
-	private PurchaseManager purchaseManager;
-	private ParkingManager parkingManager;
-	private ParkingMonitor parkingMonitor;
+	private ParkingZoneManager  zoneManager;
+	private PurchaseManager     purchaseManager;
+	private ParkingManager      parkingManager;
+	private ParkingMonitor      parkingMonitor;
+	private CellPhoneAppManager cellPhoneAppManager;
 
 	public SEM(ParkingZoneManager zoneManager, PurchaseManager purchaseManager, ParkingManager parkingManager,
-			ParkingMonitor parkingMonitor) {
+			ParkingMonitor parkingMonitor, CellPhoneAppManager cellPhoneAppManager) {
 		this.zoneManager = zoneManager;
 		this.purchaseManager = purchaseManager;
 		this.parkingManager = parkingManager;
 		this.parkingMonitor = parkingMonitor;
+		this.cellPhoneAppManager = cellPhoneAppManager;
 	}
 
 	public void closeAllParkings() {
@@ -53,5 +55,9 @@ public class SEM {
 			InspectorApp inspectorApp) {
 		return parkingManager.generateParkingTicketFor(aLicensePlate, parkingZone, inspectorApp);
 
+	}
+	
+	public void loadBalance(Integer aPhoneNumber, Float anAmount) {
+		cellPhoneAppManager.loadBalance(aPhoneNumber, anAmount);
 	}
 }

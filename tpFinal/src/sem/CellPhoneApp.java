@@ -95,6 +95,10 @@ public class CellPhoneApp {
 		return state;
 	}
 	
+	public Integer getPhoneNumber() {
+		return phoneNumber;
+	}
+	
 	public void onGpsUpdate(String updateType) {
 		state.handle(updateType, this, defaultLicensePlate);
 	}

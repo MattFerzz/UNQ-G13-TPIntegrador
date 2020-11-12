@@ -12,16 +12,18 @@ import sem.ParkingManager;
 import sem.ParkingMonitor;
 import sem.ParkingZoneManager;
 import sem.PurchaseManager;
+import sem.CellPhoneAppManager;
 import sem.SEM;
 
 public class SEMTest {
 
-	ParkingZoneManager parkingZoneManager = mock(ParkingZoneManager.class);
-	ParkingManager parkingManager = mock(ParkingManager.class);
-	PurchaseManager purchaseManager = mock(PurchaseManager.class);
-	ParkingMonitor parkingMonitor = mock(ParkingMonitor.class);
-
-	SEM server = new SEM(parkingZoneManager, purchaseManager, parkingManager, parkingMonitor);
+	ParkingZoneManager parkingZoneManager   = mock(ParkingZoneManager.class);
+	ParkingManager parkingManager           = mock(ParkingManager.class);
+	PurchaseManager purchaseManager         = mock(PurchaseManager.class);
+	ParkingMonitor parkingMonitor           = mock(ParkingMonitor.class);
+	CellPhoneAppManager cellPhoneAppManager = mock(CellPhoneAppManager.class);
+	
+	SEM server = new SEM(parkingZoneManager, purchaseManager, parkingManager, parkingMonitor, cellPhoneAppManager);
 
 	@Test
 	public void testCloseAllParkings() {
@@ -80,5 +82,11 @@ public class SEMTest {
 		InspectorApp inspectorApp = mock(InspectorApp.class);
 		server.generateParkingTicketFor("AA403BG", parkingZone, inspectorApp);
 		verify(parkingManager).generateParkingTicketFor("AA403BG", parkingZone, inspectorApp);
+	}
+	
+	@Test
+	public void testLoadBalance() {
+		server.loadBalance(123456, 48F);
+		verify(cellPhoneAppManager).loadBalance(123456, 48F);
 	}
 }
