@@ -53,30 +53,30 @@ public class CellPhoneApp {
 	}
 	
 	public LocalTime latestPossibleTimeFor(double anHoursAmount, LocalTime aStartingTime) {
-		LocalTime ret;
+		LocalTime latestTime;
 		if (anHoursAmount + aStartingTime.getHour() >= 24 || aStartingTime.plusHours((long) anHoursAmount).isAfter(LocalTime.of(20,00))) {
-			ret = LocalTime.of(20,00);
+			latestTime = LocalTime.of(20,00);
 		} else {
-			ret = aStartingTime.plusHours((long) anHoursAmount);
+			latestTime = aStartingTime.plusHours((long) anHoursAmount);
 		}
-		return ret;
+		return latestTime;
 	}
 	
 	public LocalTime currentTimeWithoutSeconds() {
-		LocalTime ret = LocalTime.now();
-		ret = ret.minusSeconds(ret.getSecond());
-		ret = ret.minusNanos(ret.getNano());
-		return ret;
+		LocalTime currentTime = LocalTime.now();
+		currentTime = currentTime.minusSeconds(currentTime.getSecond());
+		currentTime = currentTime.minusNanos(currentTime.getNano());
+		return currentTime;
 	}
 	
 	public float calculateDuration(LocalTime aStartingTime, LocalTime anEndingTime) {
-		float ret;
+		float duration;
 		if(aStartingTime.getMinute() > anEndingTime.getMinute()) {
-			ret = anEndingTime.getHour() - aStartingTime.getHour() - 1;
+			duration = anEndingTime.getHour() - aStartingTime.getHour() - 1;
 		} else {
-			ret = anEndingTime.getHour() - aStartingTime.getHour();
+			duration = anEndingTime.getHour() - aStartingTime.getHour();
 		}
-		return ret;
+		return duration;
 	}
 	
 	public void loadBalance(Float x) {
