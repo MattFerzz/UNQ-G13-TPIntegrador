@@ -1,8 +1,6 @@
 package semTests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;

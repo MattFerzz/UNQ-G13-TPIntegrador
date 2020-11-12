@@ -2,20 +2,16 @@ package semTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.eclipse.collections.api.factory.Lists;
-import org.eclipse.collections.api.list.MutableList;
 import org.eclipse.collections.api.tuple.Pair;
 import org.eclipse.collections.impl.tuple.Tuples;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.*;
+import org.mockito.Mockito;
 
 import sem.Coordinate;
-import sem.InspectorApp;
-import sem.LocalParking;
 import sem.MeasuredParkingZone;
-import sem.Parking;
 import sem.ParkingStore;
+import sem.SEM;
 
 class MeasuredParkingZoneTest {
 	private Coordinate mockParkingStoreLocation;
@@ -24,6 +20,7 @@ class MeasuredParkingZoneTest {
 	private Pair<Coordinate, Coordinate> boundaries;
 	private MeasuredParkingZone parkingZone;
 	private String description;
+	private SEM mockSystem;
 
 	@BeforeEach
 	void setUp() {
@@ -32,8 +29,9 @@ class MeasuredParkingZoneTest {
 		boundaries = Tuples.pair(mockCoordinate, mockCoordinate);
 		description = "Zona de estacionamiento barrio Kolynos";
 		parkingStore = Mockito.mock(ParkingStore.class);
+		mockSystem = Mockito.mock(SEM.class);
 
-		parkingZone = new MeasuredParkingZone(description, boundaries);
+		parkingZone = new MeasuredParkingZone(description, boundaries, mockSystem);
 	}
 
 	@Test

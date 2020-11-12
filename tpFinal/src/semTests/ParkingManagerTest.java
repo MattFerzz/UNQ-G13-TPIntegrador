@@ -3,18 +3,15 @@ package semTests;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import sem.AppParking;
 import sem.InspectorApp;
-import sem.LocalParking;
 import sem.MeasuredParkingZone;
 import sem.Parking;
 import sem.ParkingManager;
-import sem.ParkingTicket;
 import sem.SEM;
 
 class ParkingManagerTest {

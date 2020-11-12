@@ -32,4 +32,8 @@ public class ParkingZoneManager{
 	public InspectorApp getInspectorAppDeployedInParkingZone(MeasuredParkingZone aParkingZone) {
 		return inspectorApps.detect(eachApp -> eachApp.getParkingZone() == aParkingZone);
 	}
+
+	public MutableList<MeasuredParkingZone> getParkingZones() {
+		return parkingZones;
+	}
 }
